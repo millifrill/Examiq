@@ -1,0 +1,44 @@
+:root {
+  --primary: #0f2c47;
+  --secondary: #347ec2;
+  /* --background: #ddd4c6; */
+  --background: #f8f8f8;
+  --textLight: #f8f8f8;
+  --textDark: #0d2944;
+  --radius: 8px;
+}
+h1 {
+  color: var(--textDark);
+  font-weight: 700;
+}
+
+h2 {
+  color: var(--textDark);
+  font-weight: 600;
+  margin: 0px;
+}
+
+p {
+  color: var(--textDark);
+  font-weight: 500;
+}
+
+.card {
+  margin: 0px 30px 20px 30px;
+}
+
+@media (min-width: 800px) {
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  .card {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 30%;
+    margin: 0px;
+  }
+}

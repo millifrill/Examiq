@@ -1,0 +1,111 @@
+:root {
+  --primary: #0f2c47;
+  --secondary: #347ec2;
+  /* --background: #ddd4c6; */
+  --background: #f8f8f8;
+  --textLight: #f8f8f8;
+  --textDark: #0d2944;
+  --radius: 8px;
+}
+.collection-info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 0 auto;
+}
+
+.collection-name-textbox {
+  width: 14rem;
+}
+
+.svg-select-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.svg-select-button {
+  /* position: relative; */
+  display: flex;
+  min-width: 60px;
+  min-height: 60px;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px black;
+  width: 3rem;
+  border-radius: 10px;
+  background-color: var(--background);
+  padding: 1px;
+  color: black;
+}
+
+.svgOptions {
+  display: none;
+}
+
+.svgOptions.active {
+  z-index: 10;
+  position: absolute;
+  display: flex;
+  top: 0px;
+  left: 65px;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  background-color: var(--background);
+  border: solid 1px black;
+  border-radius: 16px;
+  padding: 10px;
+}
+
+.svgOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 60px;
+  padding: 2px;
+  background-color: var(--background);
+  /* background-color: red; */
+}
+.svgImage {
+  color: black;
+  height: 50px;
+  width: 50px;
+}
+
+/* .svgTitle {
+  font-size: 10px;
+  font-weight: 300;
+} */
+.add-question-text {
+  margin: 2.5rem 0;
+  font-weight: 600;
+}
+.card-select {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+.cardSelect {
+  margin: 0 1rem;
+}
+.shadows {
+  position: relative;
+  height: 30px;
+}
+.question-box {
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 20rem;
+  min-height: 5rem;
+  height: 10rem;
+  margin-bottom: 0.5rem;
+}
+
+.answer {
+  margin: 0.5rem 0;
+  height: 3rem;
+}

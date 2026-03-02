@@ -12,6 +12,7 @@ interface Quiz extends RowDataPacket {
   quizCorrectAnswer: string;
   quizAnswer1: string;
   quizAnswer2: string;
+  quizAnswer3: string;
   categoryId: number;
 }
 
@@ -27,6 +28,7 @@ export async function createQuiz(req: Request, res: Response) {
     quizCorrectAnswer,
     quizAnswer1,
     quizAnswer2,
+    quizAnswer3,
     categoryId,
   } = req.body;
 
@@ -36,18 +38,20 @@ export async function createQuiz(req: Request, res: Response) {
     !quizCorrectAnswer ||
     !quizAnswer1 ||
     !quizAnswer2 ||
+    !quizAnswer3 ||
     !categoryId
   ) {
     return res.status(400).json({ error: 'All fields are required' });
   }
   try {
     const [results] = await db.query<ResultSetHeader>(
-      'INSERT INTO quiz (quizQuestion, quizCorrectAnswer, quizAnswer1, quizAnswer2, categoryId, collectionId) VALUES (?, ?, ?, ?, ?, ?)',
+      'INSERT INTO quiz (quizQuestion, quizCorrectAnswer, quizAnswer1, quizAnswer2, quizAnswer3, categoryId, collectionId) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [
         quizQuestion,
         quizCorrectAnswer,
         quizAnswer1,
         quizAnswer2,
+        quizAnswer3,
         categoryId,
         collectionId,
       ],
@@ -106,6 +110,7 @@ export async function updateQuiz(req: Request, res: Response) {
     quizCorrectAnswer,
     quizAnswer1,
     quizAnswer2,
+    quizAnswer3,
     categoryId,
   } = req.body;
 
@@ -114,6 +119,7 @@ export async function updateQuiz(req: Request, res: Response) {
     !quizCorrectAnswer ||
     !quizAnswer1 ||
     !quizAnswer2 ||
+    !quizAnswer3 ||
     !categoryId ||
     !collectionId
   ) {
@@ -122,12 +128,13 @@ export async function updateQuiz(req: Request, res: Response) {
 
   try {
     const [results] = await db.query<ResultSetHeader>(
-      'UPDATE quiz SET quizQuestion = ?, quizCorrectAnswer = ?, quizAnswer1 = ?, quizAnswer2 = ?, categoryId = ?, collectionId = ? WHERE quizId = ?',
+      'UPDATE quiz SET quizQuestion = ?, quizCorrectAnswer = ?, quizAnswer1 = ?, quizAnswer2 = ?, quizAnswer3 = ?, categoryId = ?, collectionId = ? WHERE quizId = ?',
       [
         quizQuestion,
         quizCorrectAnswer,
         quizAnswer1,
         quizAnswer2,
+        quizAnswer3,
         categoryId,
         collectionId,
         id,

@@ -3,15 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Create Quiz</title>
+    <script type="module" src="./js/main.js" defer></script>
+    <script type="module" src="./js/createQuiz.js" defer></script>
+    <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="./styles/footer.css" />
+    <link rel="stylesheet" href="./styles/createQuiz.css" />
+    <title>Create Quiz</title>
   </head>
 
   <body>
     <header id="headerContainer"></header>
-    <main>Main saker</main>
+    <main>
+      <h2>Skapa quiz</h2>
+
+
+      </div>
+      <div class="collection-info">
+        <div class="svg-select-container">
+        <button class="svg-select-button"></button>
+        <div class="svgOptions"></div>
+      </div>
+        <div>
+          <input
+            class="collection-name-textbox"
+            type="text"
+            placeholder="Samlingsnamn"
+          />
+        </div>
+      </div>
+
+      <div class="add-question-text">Lägg till fråga</div>
+
+        <div class="card-select">
+          <select class="cardSelect">
+            <option value="10">Test</option>
+          </select>
+        </div>
+        <!-- <div class="shadows">
+          <div class="shadowbox"></div>
+        <div class="shadowboxtwo"></div>
+      </div> -->
+
+          <textarea class="question-box" type="text" placeholder="Fråga..."></textarea>
+          <input
+            id="correctAnswer"
+            class="answer"
+            type="text"
+            placeholder="Rätt svar..."
+          />
+          <input class="answer optionone" type="text" placeholder="Alternativ..." />
+          <input class="answer optiontwo" type="text" placeholder="Alternativ..." />
+          <input class="answer optionthree" type="text" placeholder="Alternativ..." />
+          <button class="addButton">Lägg till</button>
+          <button class="completeButton">Slutför Samling</button>
+
+      </div>
+    </main>
     <footer id="footerContainer"></footer>
   </body>
 </html>
