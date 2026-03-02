@@ -4,24 +4,6 @@ use mongodb-the-project
 
 db.users.createIndex({username: 1}, { unique: true})
 
-db.users.insertMany([
-    {
-        username: 'Test1',
-        userEmail: 'test1@gmail.com',
-        userPassword: 'password1'
-    },
-    {
-        username: 'Test2',
-        userEmail: 'test2@gmail.com',
-        userPassword: 'password2'
-    },
-    {
-        username: 'Test3',
-        userEmail: 'test3@gmail.com',
-        userPassword: 'password3'
-    }
-])
-
 db.users.find()
 
 db.dropDatabase()

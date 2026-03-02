@@ -156,6 +156,10 @@ input:focus {
   border-radius: 8px;
 }
 
+.error-message {
+  color: rgb(182, 25, 25);
+}
+
 @media screen and (min-width: 600px) {
   .container {
     max-width: 600px;

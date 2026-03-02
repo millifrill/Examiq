@@ -19,10 +19,11 @@ async function createUser(event) {
 
   if (userPassword !== password2) {
     errorMessage.textContent = 'Lösenorden matchar inte';
+    return;
   }
 
   try {
-    const res = await fetch('http://localhost:3000/api/user', {
+    const res = await fetch('http://localhost:3000/api/register', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -31,9 +32,9 @@ async function createUser(event) {
     });
     const data = await res.json();
     console.log('data', data);
+    window.location.href = 'login.html';
   } catch (err) {
     console.error('Error creating user account', err);
   }
-  window.location.href = 'login.html';
 }
 form.addEventListener('submit', createUser);
