@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express';
 import { ObjectId, type OptionalId } from 'mongodb';
 import { mongoDatabase } from '../connectionMongoDB.ts';
+import bcrypt from 'bcrypt';
 
 interface User {
   userId?: string;
@@ -45,12 +46,15 @@ export const createUser = async (
   res: Response,
 ) => {
   const { username, userEmail, userPassword } = req.body;
+  const hashedPassword = await bcrypt.hash(userPassword, 10);
   try {
     await mongoDatabase.collection<OptionalId<User>>('users').insertOne({
       username: username,
       userEmail: userEmail,
-      userPassword: userPassword,
+      userPassword: hashedPassword,
     });
+    console.log('Password from user', userPassword);
+    console.log('Hashed password', hashedPassword);
   } catch (err) {
     console.error('Error creating user:', err);
     return res.status(500).json({ error: 'Failed to create user' });

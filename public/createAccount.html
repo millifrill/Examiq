@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./js/header.js" defer></script>
     <script type="module" src="./js/main.js" defer></script>
-    <script src="scripts/createAccount.js" defer></script>
+    <script src="js/createAccount.js" defer></script>
     <link rel="stylesheet" href="styles/global.css" />
-    <link rel="stylesheet" href="styles/login.css" />
+    <link rel="stylesheet" href="styles/createAccount.css" />
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="./styles/footer.css" />
     <title>Examic - Skapa konto</title>
@@ -41,7 +42,7 @@
             name="password1"
             minlength="10"
             maxlength="20"
-            pattern="[A-Za-z0-9]+\?!\."
+            pattern="[A-Za-z0-9]+[?!.]"
             required
           />
           <label for="password2">Lösenord igen</label>
@@ -52,10 +53,11 @@
             name="password2"
             minlength="10"
             maxlength="20"
-            pattern="[A-Za-z0-9]+\?!\."
+            pattern="[A-Za-z0-9]+[?!.]"
             required
           />
           <button id="create-account-btn" type="submit">Skapa konto</button>
+          <p id="error-message"></p>
         </form>
       </div>
     </main>
