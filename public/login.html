@@ -14,33 +14,35 @@
   <body>
     <header id="headerContainer"></header>
     <main>
-      <h1>Login</h1>
-      <div>
-        <form id="form" action="" autocomplete="off">
-          <label for="username">Användarnamn</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Ange ditt användarnamn"
-            required
-          />
-          <label for="password">Lösenord</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Ange ditt lösenord"
-            required
-          />
-          <button type="submit">Logga in</button>
-          <p>
-            Har du inget konto?<a id="create-accout" href="createAccount.html"
-              >Skapa konto</a
-            >
-          </p>
-          <p id="error-message"></p>
-        </form>
+      <div class="container">
+        <h2>Login</h2>
+        <div>
+          <form id="form" action="" autocomplete="off">
+            <label for="username">Användarnamn</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Ange ditt användarnamn"
+              required
+            />
+            <label for="password">Lösenord</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Ange ditt lösenord"
+              required
+            />
+            <button class="button" type="submit">Logga in</button>
+            <p>
+              Har du inget konto?<a id="create-accout" href="createAccount.html"
+                >Skapa konto</a
+              >
+            </p>
+            <p id="error-message"></p>
+          </form>
+        </div>
       </div>
     </main>
     <footer id="footerContainer"></footer>
