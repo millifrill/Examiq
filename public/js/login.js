@@ -1,12 +1,12 @@
-const form = document.querySelector('form');
+const form = document.querySelector('#loginForm');
 const inputUsername = document.querySelector('#username');
 const inputPassword = document.querySelector('#password');
 const errorMessage = document.querySelector('.error-message');
 
 async function loginUser(event) {
   event.preventDefault();
-  let username = inputUsername.value;
-  let userPassword = inputPassword.value;
+  let username = inputUsername.value.trim().toLowerCase();
+  let userPassword = inputPassword.value.trim();
 
   try {
     const res = await fetch('http://localhost:3000/api/login', {

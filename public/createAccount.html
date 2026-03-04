@@ -18,12 +18,13 @@
       <div class="container">
         <h2>Skapa konto</h2>
         <div>
-          <form id="form" action="" autocomplete="off">
+          <form id="registerForm" action="" autocomplete="off">
             <label for="username">Användarnamn</label>
             <input
               type="text"
               id="username"
               name="username"
+              minlength="2"
               placeholder="Ange ditt användarnamn"
               required
             />
@@ -43,7 +44,6 @@
               name="password1"
               minlength="10"
               maxlength="20"
-              pattern="[A-Za-z0-9]+[?!.]"
               required
             />
             <label for="password2">Lösenord igen</label>
@@ -54,13 +54,12 @@
               name="password2"
               minlength="10"
               maxlength="20"
-              pattern="[A-Za-z0-9]+[?!.]"
               required
             />
             <button class="create-account-btn button" type="submit">
               Skapa konto
             </button>
-            <p id="error-message"></p>
+            <p class="error-message"></p>
           </form>
         </div>
       </div>

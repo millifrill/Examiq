@@ -178,6 +178,8 @@ a.button {
 
 .error-message {
   color: rgb(182, 25, 25);
+  font-size: 14px;
+  font-weight: 300;
 }
 
 @media screen and (min-width: 600px) {
