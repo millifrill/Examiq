@@ -135,6 +135,12 @@ input:focus {
   border-radius: 8px;
 }
 
+a.button {
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
 .container {
   width: 320px;
 }

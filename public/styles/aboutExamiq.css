@@ -14,20 +14,3 @@
 .h3 {
   text-align: left;
 }
-
-/* @media (min-width: 800px) {
-  .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .card {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 30%;
-    margin: 0px;
-  }
-} */
