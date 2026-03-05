@@ -1,0 +1,16 @@
+:root {
+  --primary: #0f2c47;
+  --secondary: #347ec2;
+  --background: #f8f8f8;
+  --textLight: #f8f8f8;
+  --textDark: #0d2944;
+  --radius: 8px;
+}
+
+.div-container {
+  margin-bottom: 30px;
+}
+
+.h3 {
+  text-align: left;
+}

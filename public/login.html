@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/main.js" defer></script>
+    <script src="js/login.js" defer></script>
     <link rel="stylesheet" href="styles/global.css" />
     <link rel="stylesheet" href="styles/login.css" />
     <link rel="stylesheet" href="./styles/header.css" />
@@ -13,33 +14,35 @@
   <body>
     <header id="headerContainer"></header>
     <main>
-      <h1>Login</h1>
-      <div>
-        <form action="">
-          <label for="username">Användarnamn</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Ange ditt användarnamn"
-            required
-          />
-          <label for="password">Lösenord</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Ange ditt lösenord"
-            required
-          />
-          <button type="submit">Logga in</button>
-          <!-- <p>Har du inget konto?<span id="create-accout">Skapa konto</span></p> -->
-          <p>
-            Har du inget konto?<a id="create-accout" href="createAccount.html"
-              >Skapa konto</a
-            >
-          </p>
-        </form>
+      <div class="container">
+        <h2>Login</h2>
+        <div>
+          <form id="loginForm" action="" autocomplete="off">
+            <label for="username">Användarnamn</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Ange ditt användarnamn"
+              required
+            />
+            <label for="password">Lösenord</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Ange ditt lösenord"
+              required
+            />
+            <button class="button" type="submit">Logga in</button>
+            <p>
+              Har du inget konto?<a id="create-accout" href="createAccount.html"
+                >Skapa konto</a
+              >
+            </p>
+            <p class="error-message"></p>
+          </form>
+        </div>
       </div>
     </main>
     <footer id="footerContainer"></footer>

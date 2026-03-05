@@ -3,3 +3,4 @@ package-lock.json
 .env*
 connectionMySQL.ts
 /dist
+test.js
