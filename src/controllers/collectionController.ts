@@ -8,22 +8,43 @@ import type { RowDataPacket } from 'mysql2';
 interface Collection extends RowDataPacket {
   collectionId: number;
   collectionName: string;
+  collectionType: string;
+  collectionCategory: number;
   sharedCollection: boolean;
   createdBy: string;
 }
 
 export async function createCollection(req: Request, res: Response) {
-  const { collectionName, sharedCollection, createdBy } = req.body;
+  const {
+    collectionName,
+    collectionType,
+    collectionCategory,
+    sharedCollection,
+    createdBy,
+  } = req.body;
   let affectedRows: number;
-  if (!collectionName || !sharedCollection || !createdBy) {
-    return res
-      .status(400)
-      .json({ error: 'collection name, shared status and creator required' });
+  if (
+    !collectionName ||
+    !collectionType ||
+    !collectionCategory ||
+    !sharedCollection ||
+    !createdBy
+  ) {
+    return res.status(400).json({
+      error:
+        'collection name, collection type, collection category, shared status and creator required',
+    });
   }
   try {
     const [results] = await db.query<ResultSetHeader>(
-      'INSERT INTO collections (collectionName, sharedCollection, createdBy) VALUES (?,?,?)',
-      [collectionName, sharedCollection, createdBy],
+      'INSERT INTO collections (collectionName, collectionType, collectionCategory, sharedCollection, createdBy) VALUES (?,?,?,?,?)',
+      [
+        collectionName,
+        collectionType,
+        collectionCategory,
+        sharedCollection,
+        createdBy,
+      ],
     );
 
     affectedRows = results.affectedRows;
@@ -87,14 +108,32 @@ export async function getCollectionById(req: Request, res: Response) {
 
 export async function updateCollection(req: Request, res: Response) {
   const { id } = req.params;
-  const { collectionName } = req.body;
-  if (!collectionName) {
-    return res.status(400).json({ error: 'collection name required' });
+  const {
+    collectionName,
+    collectionType,
+    collectionCategory,
+    sharedCollection,
+  } = req.body;
+  if (
+    !collectionName ||
+    !collectionType ||
+    !collectionCategory ||
+    !sharedCollection
+  ) {
+    return res.status(400).json({
+      error: 'collection name, type, category, and shared status required',
+    });
   }
   try {
     const [results] = await db.query<ResultSetHeader>(
-      'UPDATE collections SET collectionName = ? WHERE collectionId = ?',
-      [collectionName, id],
+      'UPDATE collections SET collectionName = ?, collectionType = ?, collectionCategory = ?, sharedCollection = ? WHERE collectionId = ?',
+      [
+        collectionName,
+        collectionType,
+        collectionCategory,
+        sharedCollection,
+        id,
+      ],
     );
     if (results.affectedRows === 0) {
       res
@@ -105,4 +144,19 @@ export async function updateCollection(req: Request, res: Response) {
     console.error('Error when using put ', err);
   }
   return res.json({ message: 'updateCollection was run' });
+}
+
+export async function getCollectionByType(req: Request, res: Response) {
+  const { type } = req.params;
+  let returnData;
+  try {
+    const [results] = await db.query<Collection[]>(
+      'SELECT * FROM collections WHERE collectionType = ?',
+      [type],
+    );
+    returnData = results;
+  } catch (err) {
+    console.error('There was an error getting the collection', err);
+  }
+  res.status(201).json({ message: 'getCollectionByType was run', returnData });
 }

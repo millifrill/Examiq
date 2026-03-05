@@ -15,25 +15,47 @@
   <body>
     <header id="headerContainer"></header>
     <main>
-      <h2>Skapa quiz</h2>
+      <h2>Skapa quiz samling</h2>
 
-
-      </div>
-      <div class="collection-info">
-        <div class="svg-select-container">
-        <button class="svg-select-button"></button>
-        <div class="svgOptions"></div>
-      </div>
-        <div>
-          <input
-            class="collection-name-textbox"
-            type="text"
-            placeholder="Samlingsnamn"
-          />
+      <div>
+        <div class="collection-info">
+          <div class="svg-select-container">
+            <button title="Ändra kategori" class="svg-select-button"></button>
+            <div class="svgOptions"></div>
+          </div>
+          <div>
+            <input
+              class="collection-name-textbox"
+              type="text"
+              placeholder="Samlingsnamn"
+            />
+          </div>
+          <button
+            title="Lägg till ny samnling"
+            class="create-collection-button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
+          </button>
         </div>
-      </div>
-
-      <div class="add-question-text">Lägg till fråga</div>
+        <select name="Samling" id="Select-Collection">
+          <option value="">Välj samling att redigera</option>
+        </select>
+        <div>Vald samling</div>
+        <div class="selected-collection">Ingen vald</div>
+        <div class="add-question-text">Lägg till fråga i samling</div>
 
         <div class="card-select">
           <select class="cardSelect">
@@ -45,19 +67,34 @@
         <div class="shadowboxtwo"></div>
       </div> -->
 
-          <textarea class="question-box" type="text" placeholder="Fråga..."></textarea>
-          <input
-            id="correctAnswer"
-            class="answer"
-            type="text"
-            placeholder="Rätt svar..."
-          />
-          <input class="answer optionone" type="text" placeholder="Alternativ..." />
-          <input class="answer optiontwo" type="text" placeholder="Alternativ..." />
-          <input class="answer optionthree" type="text" placeholder="Alternativ..." />
-          <button class="addButton">Lägg till</button>
-          <button class="completeButton">Slutför Samling</button>
-
+        <textarea
+          class="question-box"
+          type="text"
+          placeholder="Fråga..."
+        ></textarea>
+        <input
+          id="correctAnswer"
+          class="answer"
+          type="text"
+          placeholder="Rätt svar..."
+        />
+        <input
+          class="answer optionone"
+          type="text"
+          placeholder="Alternativ..."
+        />
+        <input
+          class="answer optiontwo"
+          type="text"
+          placeholder="Alternativ..."
+        />
+        <input
+          class="answer optionthree"
+          type="text"
+          placeholder="Alternativ..."
+        />
+        <button class="addButton button">Lägg till</button>
+        <button class="completeButton button">Slutför Samling</button>
       </div>
     </main>
     <footer id="footerContainer"></footer>

@@ -54,3 +54,16 @@ export function findId(name) {
     (key) => categories[key].toLowerCase() === name.toLowerCase(),
   );
 }
+
+export async function getCollections(type) {
+  try {
+    const res = await fetch(`http://localhost:3000/api/collectionType/${type}`);
+
+    const data = await res.json();
+    console.log(data.returnData);
+
+    return data.returnData;
+  } catch (err) {
+    console.error('failed to fetch collections', err);
+  }
+}
