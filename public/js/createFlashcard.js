@@ -1,5 +1,5 @@
 const card = document.querySelectorAll('.accordion');
-const icons = document.querySelector('.edit-delete-icons-div');
+const deleteIcon = document.querySelector('.delete-icon');
 let i;
 
 function openAccordion(event) {
@@ -11,9 +11,9 @@ function openAccordion(event) {
     panel.style.display = 'block';
   }
   if (panel.style.display === 'block') {
-    icons.style.display = 'block';
+    deleteIcon.style.display = 'block';
   } else {
-    icons.style.display = 'none';
+    deleteIcon.style.display = 'none';
   }
 }
 

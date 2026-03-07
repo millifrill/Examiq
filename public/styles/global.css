@@ -1,3 +1,4 @@
+/* eslint-disable css/use-baseline */
 @font-face {
   font-family: 'Poppins';
   src: url(../fonts/poppins.bold.ttf) format('truetype');
@@ -65,7 +66,8 @@ main {
   flex: 1;
   flex-direction: column;
   align-items: center;
-  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
   min-height: 600px;
   margin: 0 auto 30px;
 }
@@ -92,10 +94,56 @@ p {
   color: var(--textDark);
 }
 
-/* .img {
-  max-width: 100%;
-  display: block;
-} */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 320px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.space-between {
+  width: 100%;
+  justify-content: space-between;
+  margin: 5px 0 5px 5px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 60px;
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid var(--primary);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius);
+  background-color: #fff;
+}
+
+.accordion {
+  background-color: #fff;
+  color: var(--primary);
+  cursor: pointer;
+  /* padding: 8px; */
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1rem;
+  transition: 0.4s;
+}
+
+.panel {
+  display: none;
+  background-color: var(--background);
+  overflow: hidden;
+}
 
 .label {
   display: block;
@@ -104,15 +152,57 @@ p {
 }
 
 .select {
-  width: 320px;
-  padding: 15px;
-  background-color: var(--background);
+  appearance: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 40px;
+  padding: 10px 15px;
+  background-color: #fff;
   border-radius: var(--radius);
-  border: 1px solid var(--primary);
-  margin-bottom: 10px;
   font-family: 'Poppins', 'Montserrat', sans-serif;
   letter-spacing: 0.5px;
   font-size: 1rem;
+  border-radius: var(--radius);
+}
+
+.input {
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  height: 40px;
+  font-size: 0.8rem;
+  font-weight: 100;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.input-div {
+  display: flex;
+  min-width: 320px;
+  max-width: 320px;
+  background-color: #fff;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+
+.input-div input {
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  width: 100%;
+  font-size: 0.8rem;
+  font-weight: 100;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: var(--radius);
+  background-color: #fff;
+  padding: 10px;
+  color: var(--primary);
 }
 
 .textarea {
@@ -129,24 +219,6 @@ p {
 
 .textarea:focus {
   outline: none;
-  outline: 1px solid #888787;
-  border-radius: 10px;
-}
-
-.input {
-  font-family: 'Poppins', 'Montserrat', sans-serif;
-  border-radius: 8px;
-  padding: 10px;
-  width: 100%;
-  font-size: 0.8rem;
-  font-weight: 100;
-  letter-spacing: 0.5px;
-}
-
-.input:focus {
-  outline: 1px solid #222;
-  color: #222;
-  border-radius: 8px;
 }
 
 a,
@@ -156,33 +228,17 @@ a.button {
   text-align: center;
 }
 
-.container {
-  width: 320px;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 320px;
-  width: 100%;
-  margin: 10px auto;
-  padding: 10px;
-  border: 1px solid rgb(34, 34, 34, 0.5);
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-  border-radius: var(--radius);
-}
-
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 15px;
-  margin-top: 10px;
-  width: 100%;
+  margin: 10px 0 0 3px;
+  width: 98%;
+  height: 60px;
   color: var(--textLight);
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgb(34, 34, 34, 0.5);
+  border: 1px solid var(--primary);
   border-radius: var(--radius);
   background-color: var(--primary);
   font-family: 'Poppins', 'Montserrat', sans-serif;
@@ -194,54 +250,40 @@ a.button {
   transition: all 0.2s ease;
 }
 
-.error-message {
-  color: rgb(182, 25, 25);
-  font-size: 14px;
-  font-weight: 300;
-}
-
 .checkbox:checked {
   accent-color: var(--primary);
 }
 
 @media screen and (min-width: 600px) {
-  h1,
-  h2,
-  h3,
-  h4 {
-    line-height: 1.5;
-  }
-
   main {
-    width: 500px;
+    min-width: 500px;
+    max-width: 500px;
     margin: 50px auto 90px;
   }
 
-  .container {
-    width: 400px;
-  }
-
-  .select {
+  .container,
+  .select,
+  .input,
+  .card {
     width: 400px;
   }
 
   .input {
-    width: 400px;
+    height: 45px;
   }
 
-  .card {
-    width: 400px;
+  .input-div {
+    min-width: 400px;
+    max-width: 400px;
+    height: 45px;
+  }
+
+  .button {
+    margin: 10px 0 0 4px;
   }
 }
 
 @media screen and (min-width: 860px) {
-  h1,
-  h2,
-  h3,
-  h4 {
-    line-height: 1.8;
-  }
-
   main {
     width: 700px;
     margin: 50px auto 90px;

@@ -1,7 +1,6 @@
 :root {
   --primary: #0f2c47;
   --secondary: #347ec2;
-  /* --background: #ddd4c6; */
   --background: #f8f8f8;
   --textLight: #f8f8f8;
   --textDark: #0d2944;
@@ -27,7 +26,6 @@
 }
 
 .svg-select-button {
-  /* position: relative; */
   display: flex;
   min-width: 60px;
   min-height: 60px;
@@ -76,10 +74,6 @@
   width: 50px;
 }
 
-/* .svgTitle {
-  font-size: 10px;
-  font-weight: 300;
-} */
 .add-question-text {
   margin: 2.5rem 0;
   font-weight: 600;
