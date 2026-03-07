@@ -1,0 +1,35 @@
+:root {
+  --primary: #0f2c47;
+  --secondary: #347ec2;
+  --background: #f8f8f8;
+  --textLight: #f8f8f8;
+  --textDark: #0d2944;
+  --radius: 8px;
+}
+
+#create-accout {
+  margin-left: 5px;
+  color: #187692;
+}
+
+#create-accout-p {
+  margin: 10px 0;
+}
+
+.input-div img {
+  width: 20px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: rgb(182, 25, 25);
+  font-size: 14px;
+  font-weight: 300;
+}
+
+@media screen and (min-width: 600px) {
+  .input-div {
+    min-width: 400px;
+    max-width: 400px;
+  }
+}

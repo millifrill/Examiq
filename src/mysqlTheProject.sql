@@ -9,14 +9,14 @@ CREATE TABLE category(
 );
 
 INSERT INTO category(categoryName)
-VALUES('History'),
-      ('Mathematics'),
-      ('Geography'),
-      ('Psychology'),
-      ('Biology'),
-      ('Chemistry'),
+VALUES('Historia'),
+      ('Matematik'),
+      ('Geografi'),
+      ('Psykologi'),
+      ('Biologi'),
+      ('Kemi'),
       ('UXD'),
-      ('Physics');
+      ('Fysik');
 
 CREATE TABLE collections(
     collectionId INT NOT NULL AUTO_INCREMENT,
