@@ -10,6 +10,8 @@ import {
   setCollectionInfo,
   setErrorInfo,
   setSuccessMessage,
+  deleteQuizcards,
+  updateQuiz,
 } from './helperFunctions.js';
 
 const pageState = {
@@ -66,6 +68,7 @@ let selectedCollectionName;
 let collections;
 let user = 1;
 let submitType = 'add';
+let selectedQuizId;
 
 updateSvg();
 collectionsOptionInit('init');
@@ -118,6 +121,8 @@ cardSelect.addEventListener('input', async () => {
   const selectedValue = selectedOption.value;
   localStorage.setItem('selectedQuestion', selectedOption.value);
   console.log('selected: ', selectedValue);
+  selectedQuizId = selectedValue;
+  console.log('you can now delete quiz with id: ', selectedQuizId);
   if (selectedValue === 'Ny fråga') {
     clearInputs();
     setAddEditButton('add');
@@ -188,7 +193,7 @@ for (const key in appState.svg) {
 
 addButton.addEventListener('click', async () => {
   if (submitType === 'edit') {
-    const data = await addNewQuiz(inputValues);
+    const data = await updateQuiz(inputValues, selectedQuizId);
     if (data.error) {
       setErrorInfo('Du måste fylla i alla fält');
       return;
@@ -203,11 +208,15 @@ addButton.addEventListener('click', async () => {
   clearQuizFields();
   // collectionsOptionInit();
   setSuccessMessage('Fråga tillagd!');
+  collectionCards = await getQuizcards(e.target.value);
+  console.log(collectionCards);
+  updateCardSelection();
 });
 
 deleteButton.addEventListener('click', async () => {
   if (!selectedQuizId) return;
-  const data = await deleteQuiz(selectedQuizId);
+  const data = await deleteQuizcards(selectedQuizId);
+
   if (data.error) {
     setErrorInfo('Kunde inte ta bort frågan');
     return;
@@ -231,7 +240,7 @@ function updateCardSelection() {
       collectionQuizzes.appendChild(quizOption);
     }
   } catch (err) {
-    console.log('Cant list questions');
+    console.log('Cant list questions', err);
   }
 }
 
@@ -251,6 +260,10 @@ async function collectionsOptionInit() {
   collectionsSelect.innerHTML = '';
   collections = await getCollections('quiz');
   if (collections) {
+    const option = document.createElement('option');
+    option.value = 'Välj samling';
+    option.textContent = 'Välj samling';
+    collectionsSelect.appendChild(option);
     for (const collection of collections) {
       const option = document.createElement('option');
       option.value = collection.collectionId;

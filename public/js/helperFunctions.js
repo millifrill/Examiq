@@ -88,7 +88,7 @@ export async function getQuizcards(id) {
     const data = await res.json();
     return data;
   } catch (err) {
-    console.error('failed to fetch collection');
+    console.error('failed to fetch collection', err);
   }
 }
 
@@ -112,7 +112,7 @@ export async function addNewQuiz(inputValues) {
       return data;
     }
   } catch (err) {
-    console.error('gick fel på något vis');
+    console.error('gick fel på något vis', err);
   }
 }
 
@@ -190,6 +190,29 @@ export async function deleteQuizcards(id) {
     const data = await res.json();
     return data;
   } catch (err) {
-    console.error('failed to delete quiz');
+    console.error('failed to delete quiz', err);
+  }
+}
+
+export async function updateQuiz(inputValues, id) {
+  try {
+    const response = await fetch(`http://localhost:3000/api/quiz/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json ' },
+      body: JSON.stringify({
+        quizQuestion: inputValues.quizQuestion,
+        quizCorrectAnswer: inputValues.quizCorrectAnswer,
+        quizAnswer1: inputValues.quizAnswer1,
+        quizAnswer2: inputValues.quizAnswer2,
+        quizAnswer3: inputValues.quizAnswer3,
+        categoryId: inputValues.categoryId,
+      }),
+    });
+    if (response) {
+      const data = await response.json();
+      return data;
+    }
+  } catch (err) {
+    console.error('gick fel på något vis', err);
   }
 }

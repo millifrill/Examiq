@@ -105,7 +105,6 @@ export async function getQuizById(req: Request, res: Response) {
 export async function updateQuiz(req: Request, res: Response) {
   const { id } = req.params;
   const {
-    collectionId,
     quizQuestion,
     quizCorrectAnswer,
     quizAnswer1,
@@ -120,15 +119,14 @@ export async function updateQuiz(req: Request, res: Response) {
     !quizAnswer1 ||
     !quizAnswer2 ||
     !quizAnswer3 ||
-    !categoryId ||
-    !collectionId
+    !categoryId
   ) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
   try {
     const [results] = await db.query<ResultSetHeader>(
-      'UPDATE quiz SET quizQuestion = ?, quizCorrectAnswer = ?, quizAnswer1 = ?, quizAnswer2 = ?, quizAnswer3 = ?, categoryId = ?, collectionId = ? WHERE quizId = ?',
+      'UPDATE quiz SET quizQuestion = ?, quizCorrectAnswer = ?, quizAnswer1 = ?, quizAnswer2 = ?, quizAnswer3 = ?, categoryId = ? WHERE quizId = ?',
       [
         quizQuestion,
         quizCorrectAnswer,
@@ -136,7 +134,6 @@ export async function updateQuiz(req: Request, res: Response) {
         quizAnswer2,
         quizAnswer3,
         categoryId,
-        collectionId,
         id,
       ],
     );
