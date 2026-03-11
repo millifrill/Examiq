@@ -1,29 +1,30 @@
 import type { Request, Response } from 'express';
 import mysqlpool from '../connectionMysql.ts';
 import type { ResultSetHeader } from 'mysql2';
-const db = mysqlpool;
-
 import type { RowDataPacket } from 'mysql2';
+
+const db = mysqlpool;
 
 interface Collection extends RowDataPacket {
   collectionId: number;
   collectionName: string;
   sharedCollection: boolean;
   createdBy: string;
+  categoryId: number;
 }
 
 export async function createCollection(req: Request, res: Response) {
-  const { collectionName, sharedCollection, createdBy } = req.body;
+  const { collectionName, sharedCollection, createdBy, categoryId } = req.body;
   let affectedRows: number;
-  if (!collectionName || !sharedCollection || !createdBy) {
+  if (!collectionName || !sharedCollection || !createdBy || !categoryId) {
     return res
       .status(400)
       .json({ error: 'collection name, shared status and creator required' });
   }
   try {
     const [results] = await db.query<ResultSetHeader>(
-      'INSERT INTO collections (collectionName, sharedCollection, createdBy) VALUES (?,?,?)',
-      [collectionName, sharedCollection, createdBy],
+      'INSERT INTO collections (collectionName, sharedCollection, createdBy, categoryId) VALUES (?,?,?,?)',
+      [collectionName, sharedCollection, createdBy, categoryId],
     );
 
     affectedRows = results.affectedRows;
@@ -36,6 +37,7 @@ export async function createCollection(req: Request, res: Response) {
     affectedRows,
   });
 }
+
 export async function getCollections(_req: Request, res: Response) {
   try {
     const [results] = await db.query<Collection[]>('SELECT * FROM collections');
@@ -87,14 +89,14 @@ export async function getCollectionById(req: Request, res: Response) {
 
 export async function updateCollection(req: Request, res: Response) {
   const { id } = req.params;
-  const { collectionName } = req.body;
+  const { collectionName, sharedCollection, categoryId } = req.body;
   if (!collectionName) {
     return res.status(400).json({ error: 'collection name required' });
   }
   try {
     const [results] = await db.query<ResultSetHeader>(
-      'UPDATE collections SET collectionName = ? WHERE collectionId = ?',
-      [collectionName, id],
+      'UPDATE collections SET collectionName = ?, sharedCollection = ?,categoryId = ? WHERE collectionId = ?',
+      [collectionName, sharedCollection, categoryId, id],
     );
     if (results.affectedRows === 0) {
       res
