@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,55 +12,70 @@
   <link rel="stylesheet" href="./styles/createFlashcard.css" />
   <title>Document</title>
 </head>
+
 <body>
   <header id="headerContainer"></header>
   <main>
     <div class="container">
       <h2>Skapa Flashcard</h2>
-      <div>
-        <label class="label" for="categories">Välj en kategori</label>
+      <form id='flashcard-form' action="" autocomplete="off">
+        <label class="label" for="collection-name">Namnge samlingen</label>
+        <input class="input" type="text" id="collection-name" name="collection-name"
+          placeholder="Ange samlingens namn" required />
+          <label class="label" for="created-by">Skapad av</label>
+        <input class="input" type="text" id="created-by" name="created-by"
+          placeholder="Ange ditt användarnamn" required />
+        <button class='create-collection-btn'>Skapa samling</button>
         <div>
-          <div class="input-div flex-row">
-            <select class="select" name="categories" id="categories">
-              <option value="history">Historia</option>
-              <option value="mathematics">Matematik</option>
-              <option value="geography">Geografi</option>
-              <option value="psychology">Psykologi</option>
-              <option value="biology">Biologi</option>
-              <option value="chemistry">Kemi</option>
-              <option value="uxd">UXD</option>
-              <option value="physics">Fysik</option>
-            </select>
-            <span class='unicode'>&#x2335</span>
-          </div>
-        </div>
-      </div>
-      <div class="checkbox">
-        <input class="checkbox" type="checkbox" id="public" name="public" value="Public" />
-        <label class="" for="public"> Publicera publikt</label>
-      </div>
-      <div class="card">
-        <div class="accordion flex-row">
-          <div class="flex-row space-between">
-            <h3 class='h3'>Flashcard 1</h3>
-            <div class="flex-row icon-div">
-              <img class="delete-icon" src="./img/delete.svg" />
+          <label class="label" for="categories">Välj en kategori</label>
+          <div>
+            <div class="input-div flex-row">
+              <select class="select" name="category" id="category">
+                <option value="history">Historia</option>
+                <option value="mathematics">Matematik</option>
+                <option value="geography">Geografi</option>
+                <option value="psychology">Psykologi</option>
+                <option value="biology">Biologi</option>
+                <option value="chemistry">Kemi</option>
+                <option value="uxd">UXD</option>
+                <option value="physics">Fysik</option>
+              </select>
               <span class='unicode'>&#x2335</span>
             </div>
           </div>
         </div>
-        <div class="panel">
-          <textarea class="textarea flashcard-question" name="flashcardQuestion" placeholder="Fråga"></textarea>
-          <textarea class="textarea" name="flashcardAnswer" placeholder="Svar"></textarea>
+        <div class="checkbox">
+          <input class="checkbox" type="checkbox" id="public" name="public" checked />
+          <label class="" for="public"> Publicera publikt</label>
         </div>
-      </div>
-      <div class="add-button">
-        <a class="add-text" href="flashcard.html"> Lägg till ett nytt kort</a>
-        <img class="add-icon" src="./img/add.svg" />
-      </div>
-      <a class="button" href="flashcard.html">Slutför och skapa samling</a>
+        <div class="card">
+          <div class="accordion flex-row">
+            <div class="flex-row space-between">
+              <h3 class='h3'>Första delen av flashcard titeln...</h3>
+              <div class="flex-row icon-div">
+                <!-- <img type="button" class="delete-icon"  src="./img/delete.svg" /> -->
+                <span class='unicode'>&#x2335</span>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <textarea class="textarea flashcard-question" name="flashcard-question" placeholder="Fråga"></textarea>
+            <textarea class="textarea" name="flashcard-answer" placeholder="Svar"></textarea>
+            <div class="flex-row space-between">
+              <button type="button" class=''>Radera kort</button>
+              <button class='save-flashcard-btn'>Spara kort</button>
+            </div>
+          </div>
+        </div>
+        <div class="add-button">
+          <a type="button" class="add-text" href="flashcard.html"> Lägg till ett nytt kort</a>
+          <img class="add-icon" src="./img/add.svg" />
+        </div>
+        <a type="submit" class="button" href="flashcard.html">Slutför och skapa samling</a>
     </div>
+    </form>
   </main>
   <footer id="footerContainer"></footer>
 </body>
+
 </html>

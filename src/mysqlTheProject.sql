@@ -23,7 +23,9 @@ CREATE TABLE collections(
     collectionName VARCHAR(50) NOT NULL,
     sharedCollection BOOLEAN DEFAULT FALSE,
     createdBy VARCHAR(50) NOT NULL,
-    PRIMARY KEY (collectionId)
+    categoryId INT NOT NULL,
+    PRIMARY KEY (collectionId),
+    FOREIGN KEY (categoryId) REFERENCES category(categoryId)
 );
 
 INSERT INTO collections(collectionName, createdBy, sharedCollection)
@@ -37,13 +39,11 @@ CREATE TABLE flashcard(
     flashcardId INT NOT NULL AUTO_INCREMENT,
 	flashcardQuestion VARCHAR(500) NOT NULL,
     flashcardAnswer VARCHAR(500) NOT NULL,
-    categoryId INT NOT NULL,
 	PRIMARY KEY (flashcardId),
-    FOREIGN KEY (categoryId) REFERENCES category(categoryId),
     FOREIGN KEY (collectionId) REFERENCES collections(collectionId) ON DELETE SET NULL
 );
 
-INSERT INTO flashcard(flashcardQuestion, flashcardAnswer,collectionId, categoryId)
+INSERT INTO flashcard(flashcardQuestion, flashcardAnswer, collectionId, categoryId)
 VALUES('Vilket år föll Berlinmuren och varför var det viktigt?', '1989. Murens fall symboliserade slutet på kalla kriget och början på Tysklands återförening.', 2, 1),
       ('Vad är 2+2?', '4', 2, 2),
       ('Vilken är världens längsta flod?', 'Nilen (ibland anses Amazonas vara längst beroende på mätmetod).',2, 3),

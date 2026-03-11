@@ -5,10 +5,10 @@ import type { RowDataPacket, ResultSetHeader } from 'mysql2';
 const mysqlDatabase = mysqlpool;
 
 interface Flashcard extends RowDataPacket {
+  collectionId: number;
   flashcardId?: number;
   flashcardQuestion: string;
   flashcardAnswer: string;
-  categoryId: number;
 }
 
 export const getFlashcards = async (_req: Request, res: Response) => {
@@ -21,8 +21,8 @@ export const getFlashcards = async (_req: Request, res: Response) => {
 export const getFlashcardById = async (
   req: Request<
     { id: number },
+    { message: string; success: boolean; error: string },
     void,
-    { flashcardQuestion: string; flashcardAnswer: string; categoryId: number },
     void
   >,
   res: Response,
@@ -44,29 +44,33 @@ export const getFlashcardById = async (
 export const createFlashcard = async (
   req: Request<
     void,
-    void,
-    { flashcardQuestion: string; flashcardAnswer: string; categoryId: number },
+    { message: string; success: boolean; error: string },
+    {
+      flashcardQuestion: string;
+      flashcardAnswer: string;
+      collectionId: number;
+    },
     void
   >,
   res: Response,
 ) => {
-  const { flashcardQuestion, flashcardAnswer, categoryId } = req.body;
-  if (!flashcardQuestion || !flashcardAnswer || !categoryId) {
+  const { flashcardQuestion, flashcardAnswer, collectionId } = req.body;
+  if (!flashcardQuestion || !flashcardAnswer || !collectionId) {
     return res.status(400).json({ error: 'All fields are required' });
   }
   const sql =
-    'INSERT INTO flashcard(flashcardQuestion, flashcardAnswer, categoryId) VALUES (?,?,?)';
+    'INSERT INTO flashcard(flashcardQuestion, flashcardAnswer, collectionId) VALUES (?,?,?)';
   try {
     await mysqlDatabase.execute<Flashcard[]>(sql, [
       flashcardQuestion,
       flashcardAnswer,
-      categoryId,
+      collectionId,
     ]);
   } catch (err) {
     console.error('Error creating flashcard:', err);
     return res.status(500).json({ error: 'Failed to create flashcard' });
   }
-  res.status(201).send('Flashcard created successfully');
+  res.status(201).json({ message: 'Flashcard created successfully' });
 };
 
 export const updateFlashcard = async (
@@ -76,24 +80,24 @@ export const updateFlashcard = async (
     {
       flashcardQuestion: string;
       flashcardAnswer: string;
-      categoryId: number;
+      collectionId: number;
     },
     void
   >,
   res: Response,
 ) => {
   const { id } = req.params;
-  const { flashcardQuestion, flashcardAnswer, categoryId } = req.body;
-  if (!flashcardQuestion || !flashcardAnswer || !categoryId) {
+  const { flashcardQuestion, flashcardAnswer, collectionId } = req.body;
+  if (!flashcardQuestion || !flashcardAnswer) {
     return res.status(400).json({ error: 'All fields are required' });
   }
   const sql =
-    'UPDATE flashcard SET flashcardQuestion = ?, flashcardAnswer = ?, categoryId = ? WHERE flashcardId = ?';
+    'UPDATE flashcard SET flashcardQuestion = ?, flashcardAnswer = ?, collectionId = ? WHERE flashcardId = ?';
   try {
     const [result] = await mysqlDatabase.execute<ResultSetHeader>(sql, [
       flashcardQuestion,
       flashcardAnswer,
-      categoryId,
+      collectionId,
       id,
     ]);
     if (result.affectedRows === 0) res.status(404).send('Flashcard not found');
@@ -108,7 +112,7 @@ export const deleteFlashcard = async (
   req: Request<
     { id: number },
     void,
-    { flashcardQuestion: string; flashcardAnswer: string; categoryId: number },
+    { flashcardQuestion: string; flashcardAnswer: string },
     void
   >,
   res: Response,
