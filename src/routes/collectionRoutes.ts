@@ -12,10 +12,10 @@ import {
 const router = express.Router();
 
 router.get('/collections', getCollections);
-router.post('/collections', createCollection);
-router.delete('/collections/:id', deleteCollection);
-router.get('/collections/:id', getCollectionById);
-router.put('/collections/:id', updateCollection);
+router.post('/collection', createCollection);
+router.delete('/collection/:id', deleteCollection);
+router.get('/collection/:id', getCollectionById);
+router.put('/collection/:id', updateCollection);
 router.get('/collectionType/:type', getCollectionByType);
 
 export default router;

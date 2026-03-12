@@ -40,6 +40,7 @@ async function createFlashcardCollection(event) {
   const sharedCollection = checkboxSharedCollection.checked;
   const createdBy = inputCreatedBy.value.trim().toLocaleLowerCase();
   const categoryId = Number(inputCategory.value);
+  const collectionType = 'flash';
 
   try {
     const res = await fetch('http://localhost:3000/api/collection', {
@@ -49,6 +50,7 @@ async function createFlashcardCollection(event) {
       },
       body: JSON.stringify({
         collectionName,
+        collectionType,
         sharedCollection,
         createdBy,
         categoryId,
@@ -58,7 +60,8 @@ async function createFlashcardCollection(event) {
     console.log('data', data);
     localStorage.setItem('collectionName', JSON.stringify(collectionName));
     localStorage.setItem('sharedCollection', JSON.stringify(sharedCollection));
-    localStorage.setItem('createdBy', JSON.stringify(createdBy));
+    localStorage.setItem('sharedCollection', JSON.stringify(sharedCollection));
+    localStorage.setItem('collectionType', JSON.stringify(collectionType));
     localStorage.setItem('categoryId', JSON.stringify(categoryId));
   } catch (err) {
     console.error('Error creating collection', err);
@@ -67,6 +70,7 @@ async function createFlashcardCollection(event) {
 createCollectionBtn.addEventListener('click', createFlashcardCollection);
 
 async function getFlashcardCollections() {
+  selectCollections.innerHTML = '';
   try {
     const res = await fetch('http://localhost:3000/api/collections');
     const data = await res.json();
@@ -80,7 +84,7 @@ async function getFlashcardCollections() {
     }
     selectCollections.append(fragment);
   } catch (err) {
-    console.error('Error creating collection', err);
+    console.error('Failed to fetch collections', err);
   }
 }
 getCollections.addEventListener('click', getFlashcardCollections);

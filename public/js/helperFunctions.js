@@ -198,7 +198,7 @@ export async function getQuizcards(data) {
 
 export async function addNewCollection(data) {
   try {
-    const response = await fetch('http://localhost:3000/api/collections', {
+    const response = await fetch('http://localhost:3000/api/collection', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json ' },
       body: JSON.stringify({
@@ -231,7 +231,7 @@ export async function updateCollection(data) {
   let response;
   try {
     const res = await fetch(
-      `http://localhost:3000/api/collections/${data.collectionId}`,
+      `http://localhost:3000/api/collection/${data.collectionId}`,
       {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json ' },
