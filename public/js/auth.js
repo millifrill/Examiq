@@ -3,11 +3,21 @@ const loginForm = document.querySelector('#loginForm');
 // const createAccountBtn = document.querySelector('#create-account-btn');
 const inputUsername = document.querySelector('#username');
 const inputEmail = document.querySelector('#email');
-const inputPassword = document.querySelector('#password');
+const inputPassword = document.querySelector('#password1');
 const inputPassword2 = document.querySelector('#password2');
 const errorMessage = document.querySelector('.error-message');
 const eyeIcon = document.querySelector('.eye-icon');
 const togglePassword = document.querySelector('.toggle-password');
+
+const url = window.location.pathname.split('/').pop();
+console.log('Current page:', url);
+let page;
+
+if (url === 'createAccount.html') {
+  page = 1;
+} else if (url === 'login.html') {
+  page = 2;
+}
 
 function togglePasswordIcon() {
   if (togglePassword.type === 'password') {
@@ -96,8 +106,9 @@ async function createUser(event) {
     console.error('Error creating user account', err);
   }
 }
-RegisterForm.addEventListener('submit', createUser);
-
+if (page === 1) {
+  RegisterForm.addEventListener('submit', createUser);
+}
 async function loginUser(event) {
   event.preventDefault();
   let username = inputUsername.value.trim().toLowerCase();
@@ -123,4 +134,6 @@ async function loginUser(event) {
     console.error('Error logging in user', err);
   }
 }
-loginForm.addEventListener('submit', loginUser);
+if (page === 2) {
+  loginForm.addEventListener('submit', loginUser);
+}
