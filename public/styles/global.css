@@ -107,6 +107,14 @@ p {
   align-items: center;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 10px;
+}
+
 .space-between {
   width: 100%;
   justify-content: space-between;
@@ -172,6 +180,7 @@ p {
   border-radius: 8px;
   padding: 10px;
   width: 100%;
+  /* flex-grow: 1; */
   height: 40px;
   font-size: 0.8rem;
   font-weight: 100;
@@ -250,6 +259,28 @@ a.button {
   transition: all 0.2s ease;
 }
 
+.button-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  color: var(--textLight);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  background-color: var(--primary);
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
 .error-message {
   color: rgb(182, 25, 25);
   font-size: 14px;
@@ -291,6 +322,11 @@ a.button {
 
   .button {
     margin: 10px 0 0 4px;
+  }
+
+  .button-small {
+    width: 45px;
+    height: 45px;
   }
 }
 
