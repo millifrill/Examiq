@@ -76,7 +76,7 @@ export const createFlashcard = async (
 export const updateFlashcard = async (
   req: Request<
     { id: number },
-    void,
+    { message: string; success: boolean; error: string },
     {
       flashcardQuestion: string;
       flashcardAnswer: string;
@@ -111,7 +111,7 @@ export const updateFlashcard = async (
 export const deleteFlashcard = async (
   req: Request<
     { id: number },
-    void,
+    { message: string; success: boolean; error: string },
     { flashcardQuestion: string; flashcardAnswer: string },
     void
   >,

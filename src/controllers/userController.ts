@@ -150,3 +150,33 @@ export const updateUser = async (
       .json({ error: 'Failed to update user', success: false });
   }
 };
+
+export const deleteUser = async (
+  req: Request<
+    { id: ObjectId },
+    { message: string; success: boolean; error: string },
+    {
+      username: string;
+      userEmail: string;
+      userPassword: string;
+    },
+    void
+  >,
+  res: Response,
+) => {
+  try {
+    const result = await mongoDatabase
+      .collection<OptionalId<User>>('users')
+      .deleteOne({
+        _id: new ObjectId(req.params.id),
+      });
+    if (result.deletedCount === 0)
+      res.status(404).json({ error: 'User not found', success: false });
+    else res.status(200).json(result);
+  } catch (err) {
+    console.error('Error deleting user:', err);
+    return res
+      .status(500)
+      .json({ error: 'Failed to delete user', success: false });
+  }
+};
