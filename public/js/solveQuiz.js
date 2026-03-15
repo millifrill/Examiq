@@ -3,13 +3,13 @@ import { getQuizcards } from './helperFunctions.js';
 let parmans = new URLSearchParams(document.location.search);
 
 const quizContainer = document.querySelector('#quizContainer');
-const finishButton = document.querySelector('.finishButton');
+// const finishButton = document.querySelector('.finishButton');
 const finishA = document.querySelector('.finishA');
 const quizId = parmans.get('id');
 
 // console.log(quizId);
 
-finishA.href = `/AgiltBackendProjekt/public/quizResult.html?id=${parmans}`;
+finishA.href = `/AgiltBackendProjekt/public/quizResult.html?id=${quizId}`;
 
 const activeQuiz = await getQuizcards({ collectionId: quizId });
 listQuestions();
@@ -23,7 +23,7 @@ function listQuestions() {
 
     const questionContainer = document.createElement('div');
     addClass(questionContainer, `question${index}`);
-    addClass(questionContainer, `question`);
+    addClass(questionContainer, `questionContainer`);
     const question = document.createElement('div');
 
     const answerOption1 = createCheckbox(

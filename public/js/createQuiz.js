@@ -89,7 +89,7 @@ async function collectionsOptionInit() {
 
       option.textContent = collection.collectionName;
       option.name = collection.collectionName;
-      console.log(collection.collectionName);
+      // console.log(collection.collectionName);
       collectionsSelect.appendChild(option);
       selectedCollectionName = collection.collectionName;
     }
@@ -291,8 +291,9 @@ function updateCardSelection() {
 function updateSvg() {
   selectSvgButton.innerHTML = appState.svg[selectedSvg];
   localStorage.setItem('selectedCategory', selectedSvg);
-  inputValues.categoryId = findId(selectedSvg);
+  inputValues.categoryId = findId(selectedSvg) || 'history';
   console.log(inputValues.categoryId);
+  console.log('selectecsvg', selectedSvg);
 }
 
 selectSvgButton.addEventListener('click', () => {
