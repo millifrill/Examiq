@@ -25,10 +25,11 @@ async function collectionsOptionInit() {
       const key = categories[collection.categoryId].toLowerCase();
       const svg = appState.svg[key];
       console.log(collection);
-      const collectionButton = document.createElement('input');
+      const collectionButton = document.createElement('button');
       collectionButton.type = 'button';
-      collectionButton.value = collection.collectionName;
+      collectionButton.innerHTML = collection.collectionName;
       collectionButton.href = '/solveQuiz.html';
+      collectionButton.classList.add('button');
       const a = document.createElement('a');
       a.href = `/AgiltBackendProjekt/public/solveQuiz.html?id=${collection.collectionId}`;
       const svgIcon = document.createElement('div');
