@@ -10,20 +10,24 @@ export function initHeader() {
   const loggedInMenu = document.querySelector('.loggedin-menu');
   const loggedOutMenu = document.querySelector('.loggedout-menu');
   const logout = document.querySelector('#logout');
-
-  // Test login header
+  const username = JSON.parse(localStorage.getItem('username'));
+  const userId = JSON.parse(localStorage.getItem('userId'));
 
   const state = {
     isLoggedIn: false,
   };
 
-  const testLoginButton = document.querySelector('.test-login');
-  testLoginButton.addEventListener('click', () => {
-    testLoginButton.classList.toggle('active');
-    state.isLoggedIn = !state.isLoggedIn;
+  if (username && userId) {
+    state.isLoggedIn = true;
     console.log('User logged in:', state.isLoggedIn);
     updateMenu();
-  });
+  }
+
+  if (!username && !userId) {
+    state.isLoggedIn = false;
+    console.log('User logged in:', state.isLoggedIn);
+    updateMenu();
+  }
 
   function updateMenu() {
     if (state.isLoggedIn) {
@@ -34,7 +38,6 @@ export function initHeader() {
       loggedOutMenu.classList.remove('loggedIn');
     }
   }
-  // Slut på Test login Header
 
   if (hamburgerButton && navMenu && backdrop) {
     hamburgerButton.addEventListener('click', () => {
