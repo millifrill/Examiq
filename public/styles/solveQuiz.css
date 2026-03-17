@@ -1,3 +1,17 @@
 .question {
   border: 1px solid black;
 }
+.quizContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.wrapper {
+}
+
+.nextButton:disabled {
+  background-color: gray;
+}

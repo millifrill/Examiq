@@ -6,66 +6,81 @@ const quizContainer = document.querySelector('#quizContainer');
 // const finishButton = document.querySelector('.finishButton');
 const finishA = document.querySelector('.finishA');
 const quizId = parmans.get('id');
-
+const next = document.querySelector('.nextButton');
+next.disabled = true;
+const info = document.querySelector('.info');
 // console.log(quizId);
+let index = 0;
 
-finishA.href = `/AgiltBackendProjekt/public/quizResult.html?id=${quizId}`;
+next.addEventListener('click', () => {
+  if (index != activeQuiz.length - 1) {
+    index++;
+
+    listQuestions();
+    next.disabled = true;
+  } else {
+    finishA.href = `/AgiltBackendProjekt/public/quizResult.html?id=${quizId}`;
+  }
+});
 
 const activeQuiz = await getQuizcards({ collectionId: quizId });
+
 listQuestions();
 // console.log(activeQuiz);
 function listQuestions() {
-  let index = 0;
+  info.innerHTML = `Fråga ${index + 1} av ${activeQuiz.length}`;
+  // for (const quiz of activeQuiz) {
+  console.log('quiz', activeQuiz[index]);
+  console.log('index', index);
+  quizContainer.innerHTML = '';
 
-  for (const quiz of activeQuiz) {
-    console.log('quiz', quiz);
-    console.log('index', index);
+  const questionContainer = document.createElement('div');
+  addClass(questionContainer, `question${index}`);
+  addClass(questionContainer, `questionContainer`);
+  const question = document.createElement('div');
 
-    const questionContainer = document.createElement('div');
-    addClass(questionContainer, `question${index}`);
-    addClass(questionContainer, `questionContainer`);
-    const question = document.createElement('div');
+  const answerOption1 = createCheckbox(
+    activeQuiz[index].quizCorrectAnswer,
+    1,
+    activeQuiz[index].collectionId,
+    activeQuiz[index].quizId,
+  );
+  const answerOption2 = createCheckbox(
+    activeQuiz[index].quizAnswer1,
+    2,
+    activeQuiz[index].collectionId,
+    activeQuiz[index].quizId,
+  );
+  const answerOption3 = createCheckbox(
+    activeQuiz[index].quizAnswer2,
+    3,
+    activeQuiz[index].collectionId,
+    activeQuiz[index].quizId,
+  );
+  const answerOption4 = createCheckbox(
+    activeQuiz[index].quizAnswer3,
+    4,
+    activeQuiz[index].collectionId,
+    activeQuiz[index].quizId,
+  );
+  // addClass(
+  //   [answerOption1, answerOption2, answerOption3, answerOption4],
+  //   'option',
+  // );
 
-    const answerOption1 = createCheckbox(
-      quiz.quizCorrectAnswer,
-      1,
-      quiz.collectionId,
-      quiz.quizId,
-    );
-    const answerOption2 = createCheckbox(
-      quiz.quizAnswer1,
-      2,
-      quiz.collectionId,
-      quiz.quizId,
-    );
-    const answerOption3 = createCheckbox(
-      quiz.quizAnswer2,
-      3,
-      quiz.collectionId,
-      quiz.quizId,
-    );
-    const answerOption4 = createCheckbox(
-      quiz.quizAnswer3,
-      4,
-      quiz.collectionId,
-      quiz.quizId,
-    );
-    // addClass(
-    //   [answerOption1, answerOption2, answerOption3, answerOption4],
-    //   'option',
-    // );
-
-    addClass(question, 'question');
-    question.innerHTML = quiz.quizQuestion;
-    questionContainer.appendChild(question);
-    questionContainer.appendChild(answerOption1);
-    questionContainer.appendChild(answerOption2);
-    questionContainer.appendChild(answerOption3);
-    questionContainer.appendChild(answerOption4);
-    index++;
-    quizContainer.appendChild(questionContainer);
+  addClass(question, 'question');
+  question.innerHTML = activeQuiz[index].quizQuestion;
+  questionContainer.appendChild(question);
+  questionContainer.appendChild(answerOption1);
+  questionContainer.appendChild(answerOption2);
+  questionContainer.appendChild(answerOption3);
+  questionContainer.appendChild(answerOption4);
+  quizContainer.appendChild(questionContainer);
+  if (index === activeQuiz.length - 1) {
+    next.value = 'Klart';
   }
 }
+// }
 
 function addClass(element, newClass) {
   let i;
@@ -99,6 +114,7 @@ function createCheckbox(answer, index, collection, quiz) {
   container.addEventListener('change', (e) => {
     if (e.target.checked)
       localStorage.setItem(`collection${collection}question${quiz}`, answer);
+    next.disabled = false;
   });
 
   return container;
