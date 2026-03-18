@@ -102,14 +102,17 @@ function createCheckbox(answer, index, collection, quiz) {
   let option = `option${index}`;
   const label = document.createElement('label');
   const element = document.createElement('input');
+  const textNode = document.createTextNode(answer);
   element.type = 'radio';
   element.value = answer;
   element.name = quiz;
   element.id = option;
   label.htmlFor = option;
-  label.innerHTML = answer;
+  // label.innerHTML = answer;
+  label.appendChild(element);
+  label.appendChild(textNode);
   container.appendChild(label);
-  container.appendChild(element);
+  // container.appendChild(element);
 
   container.addEventListener('change', (e) => {
     if (e.target.checked)

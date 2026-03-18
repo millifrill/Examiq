@@ -6,13 +6,14 @@ const quiz = parmans.get('id');
 console.log(quiz);
 const scoreContainer = document.querySelector('scoreContainer');
 const selectedQuiz = await getQuizcards({ collectionId: quiz });
-const score = document.querySelector('score');
-let correct;
-let wrong;
+const score = document.querySelector('.score');
+
 console.log(selectedQuiz);
 listResults();
 
 function listResults() {
+  let correct = 0;
+  let wrong = 0;
   for (const quizQuestion of selectedQuiz) {
     const questionContainer = document.createElement('div');
     questionContainer.classList.add('questionBox');
@@ -61,4 +62,5 @@ function listResults() {
 
     quizResult.appendChild(questionContainer);
   }
+  score.innerHTML = `Du fick ${correct} av ${correct + wrong} rätt`;
 }
