@@ -31,20 +31,22 @@ eyeIcon2.addEventListener('click', function () {
 });
 
 async function getUser() {
+  const userId = JSON.parse(localStorage.getItem('userId'));
+
   try {
-    const res = await fetch('http://localhost:3000/api/users');
+    const res = await fetch(`http://localhost:3000/api/user/${userId}`);
     const data = await res.json();
     console.log('data', data);
-    console.log('username ', data[0].username);
-    console.log('userEmail ', data[0].userEmail);
+    //  console.log('username ', data[0].username);
+    //  console.log('userEmail ', data[0].userEmail);
 
-    const getCardUsername = data[0].username;
+    const getCardUsername = data.username;
     console.log('getCardUsername', getCardUsername);
     const toUpperCaseUsername =
       getCardUsername.charAt(0).toUpperCase() + getCardUsername.slice(1);
     cardUsername.textContent = toUpperCaseUsername;
 
-    const getCardUserEmail = data[0].userEmail;
+    const getCardUserEmail = data.userEmail;
     console.log('getCardUserEmail', getCardUserEmail);
     cardUserEmail.textContent = getCardUserEmail;
   } catch (error) {
