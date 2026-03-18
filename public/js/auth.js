@@ -1,13 +1,17 @@
+import { togglePassword, validateUserInput } from './helperFunctions.js';
+
 const RegisterForm = document.querySelector('#registerForm');
 const loginForm = document.querySelector('#loginForm');
-// const createAccountBtn = document.querySelector('#create-account-btn');
 const inputUsername = document.querySelector('#username');
 const inputEmail = document.querySelector('#email');
-const inputPassword = document.querySelector('#password1');
+const inputPassword1 = document.querySelector('#password1');
 const inputPassword2 = document.querySelector('#password2');
 const errorMessage = document.querySelector('.error-message');
-const eyeIcon = document.querySelector('.eye-icon');
-const togglePassword = document.querySelector('.toggle-password');
+const eyeIcon1 = document.querySelector('.eye-icon1');
+const eyeIcon2 = document.querySelector('.eye-icon2');
+const togglePassword1 = document.querySelector('.toggle-password1');
+const togglePassword2 = document.querySelector('.toggle-password2');
+const privacyPolicy = document.querySelector('#privacy-policy');
 
 const url = window.location.pathname.split('/').pop();
 console.log('Current page:', url);
@@ -19,77 +23,31 @@ if (url === 'createAccount.html') {
   page = 2;
 }
 
-function togglePasswordIcon() {
-  if (togglePassword.type === 'password') {
-    togglePassword.type = 'text';
-    eyeIcon.src = './img/eye-open.svg';
-  } else {
-    togglePassword.type = 'password';
-    eyeIcon.src = './img/eye-closed.svg';
-  }
+eyeIcon1.addEventListener('click', function () {
+  togglePassword(togglePassword1, eyeIcon1);
+});
+
+if (page === 1) {
+  eyeIcon2.addEventListener('click', function () {
+    togglePassword(togglePassword2, eyeIcon2);
+  });
 }
-eyeIcon.addEventListener('click', togglePasswordIcon);
 
 async function createUser(event) {
   event.preventDefault();
-  let username = inputUsername.value.trim().toLowerCase();
-  let userEmail = inputEmail.value.trim().toLowerCase();
-  let userPassword = inputPassword.value.trim();
-  let userPassword2 = inputPassword2.value.trim();
+  const username = inputUsername.value.trim().toLowerCase();
+  const userEmail = inputEmail.value.trim().toLowerCase();
+  const userPassword1 = inputPassword1.value.trim();
+  const userPassword2 = inputPassword2.value.trim();
+  const userPassword = userPassword1;
 
-  if (username.length < 2) {
-    errorMessage.textContent = 'Användarnamnet måste vara minst 2 karaktärer';
-    return;
-  }
-
-  if (username.length > 20) {
-    errorMessage.textContent =
-      'Användarnamnet får inte vara mer än 20 karaktärer';
-    return;
-  }
-
-  if (!userEmail.includes('.')) {
-    errorMessage.textContent = 'Email behöver innehålla .';
-    return;
-  }
-
-  if (!userEmail.includes('@')) {
-    errorMessage.textContent = 'Email behöver innehålla @';
-    return;
-  }
-
-  if (userPassword.length < 10) {
-    errorMessage.textContent = 'Lösenordet måste vara minst 10 karaktärer';
-    return;
-  }
-
-  if (!/[a-zåäö]/.test(userPassword)) {
-    errorMessage.textContent =
-      'Lösenordet måste innehålla minst 1 liten bokstav';
-    return;
-  }
-
-  if (!/[A-ÖÅÄÖ]/.test(userPassword)) {
-    errorMessage.textContent =
-      'Lösenordet måste innehålla minst 1 stor bokstav';
-    return;
-  }
-
-  if (!/[0-9]/.test(userPassword)) {
-    errorMessage.textContent = 'Lösenordet måste innehålla minst 1 siffra';
-    return;
-  }
-
-  if (!/[^A-Za-z0-9ÅÄÖåäö]/.test(userPassword)) {
-    errorMessage.textContent =
-      'Lösenordet måste innehålla minst 1 specialtecken';
-    return;
-  }
-
-  if (userPassword !== userPassword2) {
-    errorMessage.textContent = 'Lösenorden matchar inte';
-    return;
-  }
+  validateUserInput(
+    username,
+    userEmail,
+    userPassword,
+    userPassword2,
+    errorMessage,
+  );
 
   try {
     const res = await fetch('http://localhost:3000/api/register', {
@@ -109,10 +67,11 @@ async function createUser(event) {
 if (page === 1) {
   RegisterForm.addEventListener('submit', createUser);
 }
+
 async function loginUser(event) {
   event.preventDefault();
-  let username = inputUsername.value.trim().toLowerCase();
-  let userPassword = inputPassword.value.trim();
+  const username = inputUsername.value.trim().toLowerCase();
+  const userPassword = inputPassword1.value.trim();
 
   try {
     const res = await fetch('http://localhost:3000/api/login', {
@@ -129,6 +88,7 @@ async function loginUser(event) {
       return;
     }
     localStorage.setItem('username', JSON.stringify(username));
+    localStorage.setItem('userId', JSON.stringify(data.userId));
     window.location.href = 'index.html';
   } catch (err) {
     console.error('Error logging in user', err);
@@ -136,4 +96,18 @@ async function loginUser(event) {
 }
 if (page === 2) {
   loginForm.addEventListener('submit', loginUser);
+}
+
+if (page === 1) {
+  const createAccountBtn = document.querySelector('.create-account-btn');
+  createAccountBtn.disabled = true;
+
+  function enableCreateAccountBtn() {
+    if (privacyPolicy.checked) {
+      createAccountBtn.disabled = false;
+    } else {
+      createAccountBtn.disabled = true;
+    }
+  }
+  privacyPolicy.addEventListener('change', enableCreateAccountBtn);
 }

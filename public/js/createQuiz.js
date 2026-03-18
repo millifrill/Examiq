@@ -51,7 +51,7 @@ const addButton = document.querySelector('.addButton');
 const deleteButton = document.querySelector('.deleteButton');
 
 let collectionCards;
-let selectedCollectionName;
+// let selectedCollectionName;
 let collections;
 let user = 1;
 let submitType = 'add';

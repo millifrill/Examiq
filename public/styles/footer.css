@@ -58,9 +58,10 @@ footer {
   text-decoration: none;
 }
 
-#h2 {
+#h4 {
   color: var(--textLight);
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 1.1rem;
   margin: 0 0 10px 0;
 }
 

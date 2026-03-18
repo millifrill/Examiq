@@ -1,0 +1,36 @@
+:root {
+  --primary: #0f2c47;
+  --secondary: #347ec2;
+  --background: #f8f8f8;
+  --textLight: #f8f8f8;
+  --textDark: #0d2944;
+  --warn: rgb(165, 27, 27);
+  --info: rgb(0, 54, 0);
+  --radius: 8px;
+}
+
+#delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin: 10px 0;
+  width: 100%;
+  height: 60px;
+  color: var(--textLight);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  background-color: var(--warn);
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+#delete-button:disabled {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /* cursor: not-allowed; */
+  opacity: 0.7;
+}

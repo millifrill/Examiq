@@ -11,6 +11,16 @@ const collectionInfo = document.querySelector('.collection-out');
 setSvgs();
 const quizMessageOut = document.querySelector('.quizMessageOut');
 
+export function togglePassword(togglePassword, eyeIcon) {
+  if (togglePassword.type === 'password') {
+    togglePassword.type = 'text';
+    eyeIcon.src = './img/eye-open.svg';
+  } else {
+    togglePassword.type = 'password';
+    eyeIcon.src = './img/eye-closed.svg';
+  }
+}
+
 function setSvgs() {
   let svgs = {
     history: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -251,4 +261,85 @@ export async function updateCollection(data) {
     console.error('gick fel på något vis', err);
   }
   return response;
+}
+
+export async function validateUserInput(
+  username,
+  userEmail,
+  currentPassword,
+  userPassword,
+  userPassword2,
+  errorMessage,
+) {
+  if (username) {
+    if (username.length < 2) {
+      errorMessage.textContent = 'Användarnamnet måste vara minst 2 karaktärer';
+      return;
+    }
+
+    if (username.length > 20) {
+      errorMessage.textContent =
+        'Användarnamnet får inte vara mer än 20 karaktärer';
+      return;
+    }
+  }
+
+  if (userEmail) {
+    if (!userEmail.includes('.')) {
+      errorMessage.textContent = 'Email behöver innehålla .';
+      return;
+    }
+
+    if (!userEmail.includes('@')) {
+      errorMessage.textContent = 'Email behöver innehålla @';
+      return;
+    }
+  }
+
+  if (currentPassword) {
+    if (currentPassword.length < 10) {
+      errorMessage.textContent = 'Lösenordet måste vara minst 10 karaktärer';
+      return;
+    }
+  }
+
+  if (userPassword || userPassword2) {
+    if (userPassword.length < 10) {
+      errorMessage.textContent = 'Lösenordet måste vara minst 10 karaktärer';
+      return;
+    }
+
+    if (userPassword2.length < 10) {
+      errorMessage.textContent = 'Lösenordet måste vara minst 10 karaktärer';
+      return;
+    }
+
+    if (!/[a-zåäö]/.test(userPassword || userPassword2)) {
+      errorMessage.textContent =
+        'Lösenordet måste innehålla minst 1 liten bokstav';
+      return;
+    }
+
+    if (!/[A-ÖÅÄÖ]/.test(userPassword || userPassword2)) {
+      errorMessage.textContent =
+        'Lösenordet måste innehålla minst 1 stor bokstav';
+      return;
+    }
+
+    if (!/[0-9]/.test(userPassword || userPassword2)) {
+      errorMessage.textContent = 'Lösenordet måste innehålla minst 1 siffra';
+      return;
+    }
+
+    if (!/[^A-Za-z0-9ÅÄÖåäö]/.test(userPassword || userPassword2)) {
+      errorMessage.textContent =
+        'Lösenordet måste innehålla minst 1 specialtecken';
+      return;
+    }
+
+    if (userPassword !== userPassword2) {
+      errorMessage.textContent = 'Lösenorden matchar inte';
+      return;
+    }
+  }
 }

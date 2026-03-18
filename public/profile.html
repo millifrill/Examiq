@@ -4,20 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="./js/main.js"></script>
-    <script type="module" src="js/auth.js"></script>
-    <link rel="stylesheet" href="styles/global.css" />
-    <link rel="stylesheet" href="styles/auth.css" />
+    <script src="./js/header.js" defer></script>
+    <script type="module" src="./js/profile.js"></script>
+    <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="./styles/footer.css" />
-    <title>Skapa konto</title>
+    <link rel="stylesheet" href="./styles/profile.css" />
+    <title>Profil</title>
   </head>
   <body>
     <header id="headerContainer"></header>
     <main>
+      <h2>Profil</h2>
       <div class="container">
-        <h2>Skapa konto</h2>
-        <div>
-          <form id="registerForm" action="" autocomplete="off">
+        <div class="edit-information">
+          <form id="updateForm" action="" autocomplete="off">
             <label class="label" for="username">Användarnamn</label>
             <input
               class="input"
@@ -25,8 +26,7 @@
               id="username"
               name="username"
               minlength="2"
-              placeholder="Ange ditt användarnamn"
-              required
+              placeholder="Ange nytt användarnamn"
             />
             <label class="label" for="username">Email</label>
             <input
@@ -34,20 +34,37 @@
               type="email"
               id="email"
               name="email"
-              placeholder="Ange email"
-              required
+              placeholder="Ange ny email"
             />
-            <label class="label" for="password1">Lösenord</label>
+            <label class="label" for="current-password"
+              >Nuvarande lösenord</label
+            >
+            <div class="input-div">
+              <input
+                class="toggle-password0"
+                placeholder="Ange nuvarande lösenord"
+                type="password"
+                id="current-password"
+                name="password"
+                minlength="10"
+                maxlength="20"
+              />
+              <img
+                src="./img/eye-closed.svg"
+                class="eye-icon0"
+                alt="Öga blundar"
+              />
+            </div>
+            <label class="label" for="password1">Nytt lösenord</label>
             <div class="input-div">
               <input
                 class="toggle-password1"
-                placeholder="Ange lösenord"
+                placeholder="Ange nytt lösenord"
                 type="password"
                 id="password1"
                 name="password"
                 minlength="10"
                 maxlength="20"
-                required
               />
               <img
                 src="./img/eye-closed.svg"
@@ -55,17 +72,16 @@
                 alt="Öga blundar"
               />
             </div>
-            <label class="label" for="password2">Lösenord igen</label>
+            <label class="label" for="password2">Nytt lösenord igen</label>
             <div class="input-div">
               <input
                 class="toggle-password2"
-                placeholder="Ange lösenord igen"
+                placeholder="Ange nytt lösenord igen"
                 type="password"
                 id="password2"
                 name="password2"
                 minlength="10"
                 maxlength="20"
-                required
               />
               <img
                 src="./img/eye-closed.svg"
@@ -73,23 +89,12 @@
                 alt="Öga blundar"
               />
             </div>
-            <button class="create-account-btn button" type="submit">
-              Skapa konto
+            <button class="button" type="submit">
+              Spara mina profiluppgifter
             </button>
-            <p class="error-message"></p>
-            <div class="checkbox">
-              <input
-                class="checkbox"
-                type="checkbox"
-                id="privacy-policy"
-                name="privacy-policy"
-              />
-              <label class="small-label" for="privacy-policy">
-                Jag godkänner behandling av mina personuppgifter enligt
-                <a href="privacyPolicy.html">integritetspolicyn</a>.</label
-              >
-            </div>
           </form>
+          <button id="delete-button">Radera mina profiluppgifter</button>
+          <p class="error-message"></p>
         </div>
       </div>
     </main>

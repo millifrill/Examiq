@@ -41,7 +41,8 @@ header {
 
 #h1-header {
   color: var(--textLight);
-  margin-left: 50px;
+  margin-left: 30px;
+  font-size: 2rem;
 }
 
 .hamburger-menu {
@@ -52,8 +53,6 @@ header {
   box-shadow: none;
   background-color: transparent;
   border: none;
-  padding: 5px;
-  padding-right: 7px;
 }
 
 .nav-menu {
