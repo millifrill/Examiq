@@ -89,6 +89,7 @@ async function loginUser(event) {
     }
     localStorage.setItem('username', JSON.stringify(username));
     localStorage.setItem('userId', JSON.stringify(data.userId));
+    // localStorage.setItem('userId', JSON.stringify(data.userEmail));
     window.location.href = 'index.html';
   } catch (err) {
     console.error('Error logging in user', err);

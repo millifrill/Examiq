@@ -1,5 +1,7 @@
 import { togglePassword, validateUserInput } from './helperFunctions.js';
 
+const cardUsername = document.querySelector('#card-username');
+const cardUserEmail = document.querySelector('#card-email');
 const updateForm = document.querySelector('#updateForm');
 const inputUsername = document.querySelector('#username');
 const deleteButton = document.querySelector('#delete-button');
@@ -27,6 +29,29 @@ eyeIcon1.addEventListener('click', function () {
 eyeIcon2.addEventListener('click', function () {
   togglePassword(togglePassword2, eyeIcon2);
 });
+
+async function getUser() {
+  try {
+    const res = await fetch('http://localhost:3000/api/users');
+    const data = await res.json();
+    console.log('data', data);
+    console.log('username ', data[0].username);
+    console.log('userEmail ', data[0].userEmail);
+
+    const getCardUsername = data[0].username;
+    console.log('getCardUsername', getCardUsername);
+    const toUpperCaseUsername =
+      getCardUsername.charAt(0).toUpperCase() + getCardUsername.slice(1);
+    cardUsername.textContent = toUpperCaseUsername;
+
+    const getCardUserEmail = data[0].userEmail;
+    console.log('getCardUserEmail', getCardUserEmail);
+    cardUserEmail.textContent = getCardUserEmail;
+  } catch (error) {
+    console.log('error ', error);
+  }
+}
+await getUser();
 
 async function updateUser(event) {
   event.preventDefault();
@@ -79,6 +104,7 @@ async function updateUser(event) {
     if (username) {
       localStorage.setItem('username', JSON.stringify(username));
     }
+    getUser();
   } catch (err) {
     console.error('Error updating user', err);
   }
@@ -95,6 +121,7 @@ async function deleteUser() {
     const data = await res.json();
     console.log('data', data);
     localStorage.setItem('userId', JSON.stringify(''));
+    localStorage.setItem('username', JSON.stringify(''));
     window.location.href = 'login.html';
   } catch (err) {
     console.error('Error deleting user', err);
