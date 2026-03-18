@@ -27,7 +27,7 @@ const pageState = {
   answerOption3: localStorage.getItem('answerOption3'),
 };
 
-let selectedSvg = pageState.selectedCategory || 1;
+let selectedSvg = pageState.selectedCategory || 'history';
 
 const svgOptions = document.querySelector('.svgOptions');
 const selectSvgButton = document.querySelector('.svg-select-button');
@@ -51,7 +51,7 @@ const addButton = document.querySelector('.addButton');
 const deleteButton = document.querySelector('.deleteButton');
 
 let collectionCards;
-// let selectedCollectionName;
+let selectedCollectionName;
 let collections;
 let user = 1;
 let submitType = 'add';
@@ -62,7 +62,7 @@ let inputValues = {
   collectionName: localStorage.getItem('collectionNameTextbox') || '',
   collectionType: 'quiz',
   sharedCollection: false,
-  collectionCategory: pageState.selectedCategory || 3,
+  collectionCategory: pageState.selectedCategory || 'history',
   quizQuestion: '',
   quizCorrectAnswer: '',
   quizAnswer1: '',
