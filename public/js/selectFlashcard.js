@@ -16,6 +16,7 @@ async function collectionsOptionInit() {
       collectionButton.href = '/solveFlashcard.html';
       collectionButton.classList.add('white-button');
       const a = document.createElement('a');
+      a.style.width = '100%';
       a.href = `/public/solveFlashcard.html?id=${collection.collectionId}`;
       a.appendChild(collectionButton);
       flashcardContainer.appendChild(a);
