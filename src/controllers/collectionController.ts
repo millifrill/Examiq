@@ -159,5 +159,7 @@ export async function getCollectionByType(req: Request, res: Response) {
   } catch (err) {
     console.error('There was an error getting the collection', err);
   }
-  res.status(201).json({ message: 'getCollectionByType was run', returnData });
+  res
+    .status(201)
+    .json({ message: 'getCollectionByType was run', returnData: returnData });
 }
