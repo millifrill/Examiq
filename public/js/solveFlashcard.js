@@ -29,7 +29,7 @@ function renderQuestions() {
       console.log('state.isQuestion flashcardQuestion ', state.isQuestion);
       document.querySelector('.know').textContent = 'Jag vet';
       document.querySelector('.know').style.backgroundColor =
-        'rgba(51, 152, 161, 0.7)';
+        'rgba(68, 165, 174, 0.7)';
       document.querySelector('.guess').textContent = 'Jag gissar';
       document.querySelector('.guess').style.backgroundColor =
         'rgba(236, 236, 74, 0.7)';
@@ -39,10 +39,10 @@ function renderQuestions() {
       console.log('state.isQuestion flashcardAnswer ', state.isQuestion);
       document.querySelector('.wrong').textContent = 'Jag hade fel';
       document.querySelector('.wrong').style.backgroundColor =
-        'rgba(131, 34, 34, 0.7)';
+        'rgba(166, 52, 52, 0.7)';
       document.querySelector('.right').textContent = 'Jag hade rätt';
       document.querySelector('.right').style.backgroundColor =
-        'rgba(119, 220, 86, 0.7)';
+        'rgba(101, 210, 121, 0.7)';
       currentAnswer++;
     }
   }
