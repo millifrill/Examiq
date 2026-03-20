@@ -25,3 +25,8 @@
   width: 48%;
   color: var(--textDark);
 }
+
+.result {
+  width: 100%;
+  color: var(--textLight);
+}
