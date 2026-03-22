@@ -273,7 +273,6 @@ a.button {
   transition: all 0.2s ease;
 }
 
-<<<<<<< HEAD
 .button-small {
   display: flex;
   align-items: center;
@@ -294,7 +293,7 @@ a.button {
   cursor: pointer;
   transform: scale(1.02);
   transition: all 0.2s ease;
-=======
+}
 .button:disabled {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   cursor: not-allowed;
@@ -304,7 +303,6 @@ a.button {
 .input-div img {
   width: 20px;
   cursor: pointer;
->>>>>>> 732078b5bc228d0ad51659d2764c9c2cd5f50374
 }
 
 .error-message {
