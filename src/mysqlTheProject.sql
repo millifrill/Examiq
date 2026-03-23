@@ -30,31 +30,29 @@ CREATE TABLE collections(
 );
 
 INSERT INTO collections(collectionName,collectionType, createdBy, sharedCollection, categoryId)
-VALUES('Min samling 1','flash',1, 0, 3 ),
-('Min samling 2', 'flash', 1, 1, 2),
-('Min samling 3', 'quiz', 1, 1, 1),
-('Min samling 4', 'quiz', 1, 0, 4);
+VALUES('Min collection 1','flash',1, 0, 3 ),
+('Min collection 2', 'flash', 1, 1, 2),
+('Min collection 3', 'quiz', 1, 1, 1),
+('Min collection 4', 'quiz', 1, 0, 4);
 
 CREATE TABLE flashcard(
     collectionId INT,
     flashcardId INT NOT NULL AUTO_INCREMENT,
 	flashcardQuestion VARCHAR(500) NOT NULL,
     flashcardAnswer VARCHAR(500) NOT NULL,
-    categoryId INT NOT NULL,
 	PRIMARY KEY (flashcardId),
-    FOREIGN KEY (categoryId) REFERENCES category(categoryId),
     FOREIGN KEY (collectionId) REFERENCES collections(collectionId) ON DELETE SET NULL
 );
 
-INSERT INTO flashcard(flashcardQuestion, flashcardAnswer, collectionId, categoryId)
-VALUES('Vilket år föll Berlinmuren och varför var det viktigt?', '1989. Murens fall symboliserade slutet på kalla kriget och början på Tysklands återförening.', 2, 1),
-      ('Vad är 2+2?', '4', 1, 2),
-      ('Vilken är världens längsta flod?', 'Nilen (ibland anses Amazonas vara längst beroende på mätmetod).', 1, 3),
-      ('Vad innebär klassisk betingning?', 'En inlärningsprocess där en neutral stimulus kopplas till en automatisk respons genom upprepad association.',1, 4),
-      ('Vad är cellens mitokondriers huvudfunktion?', 'Att producera energi (ATP) genom cellandning.', 2, 5),
-      ('Vad är pH-värde ett mått på?', 'Hur sur eller basisk en lösning är.', 2, 6),
-      ('Vad innebär användarcentrerad design?', 'Att designprocessen fokuserar på användarnas behov, beteenden och mål för att skapa bättre användarupplevelser.', 1, 7),
-      ('Vad säger Newtons första lag?', 'Ett föremål förblir i vila eller rör sig med konstant hastighet om ingen yttre kraft påverkar det.', 2, 8);
+INSERT INTO flashcard(flashcardQuestion, flashcardAnswer, collectionId)
+VALUES('Vilket år föll Berlinmuren och varför var det viktigt?', '1989. Murens fall symboliserade slutet på kalla kriget och början på Tysklands återförening.', 2),
+      ('Vad är 2+2?', '4', 1),
+      ('Vilken är världens längsta flod?', 'Nilen (ibland anses Amazonas vara längst beroende på mätmetod).', 1),
+      ('Vad innebär klassisk betingning?', 'En inlärningsprocess där en neutral stimulus kopplas till en automatisk respons genom upprepad association.',1),
+      ('Vad är cellens mitokondriers huvudfunktion?', 'Att producera energi (ATP) genom cellandning.', 2),
+      ('Vad är pH-värde ett mått på?', 'Hur sur eller basisk en lösning är.', 2),
+      ('Vad innebär användarcentrerad design?', 'Att designprocessen fokuserar på användarnas behov, beteenden och mål för att skapa bättre användarupplevelser.', 1),
+      ('Vad säger Newtons första lag?', 'Ett föremål förblir i vila eller rör sig med konstant hastighet om ingen yttre kraft påverkar det.', 2);
 
 CREATE TABLE quiz(
     collectionId INT,
