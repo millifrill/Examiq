@@ -1,12 +1,10 @@
 import { getCollections } from './helperFunctions.js';
 
-const flashcardContainer = document.querySelector(
-  '.container',
-) as HTMLDivElement;
+const flashcardContainer = document.querySelector<HTMLDivElement>('.container');
 let collections;
 
 async function collectionsOptionInit(): Promise<void> {
-  flashcardContainer.innerHTML = '';
+  flashcardContainer!.innerHTML = '';
   collections = await getCollections('flash');
   console.log('collections', collections);
   if (collections) {
@@ -18,7 +16,7 @@ async function collectionsOptionInit(): Promise<void> {
       collectionButton.classList.add('white-button');
       collectionButton.style.width = '100%';
       collectionButton.href = `./solveFlashcard.html?id=${collection.collectionId}`;
-      flashcardContainer.appendChild(collectionButton);
+      flashcardContainer?.appendChild(collectionButton);
     }
   }
   console.log('collections', collections);

@@ -12,4 +12,4 @@ function clearLocaleStorage() {
   localStorage.removeItem('knowAnswersCount');
   localStorage.removeItem('guessAnswersCount');
 }
-solveQuizButton!.addEventListener('click', clearLocaleStorage);
+solveQuizButton?.addEventListener('click', clearLocaleStorage);
