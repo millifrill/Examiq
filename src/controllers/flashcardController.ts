@@ -21,7 +21,7 @@ export const getFlashcards = async (_req: Request, res: Response) => {
 export const getFlashcardById = async (
   req: Request<
     { id: number },
-    { message: string; success: boolean; error: string },
+    { success?: boolean; error?: string },
     void,
     void
   >,
@@ -32,19 +32,23 @@ export const getFlashcardById = async (
   try {
     const [result] = await mysqlDatabase.execute<Flashcard[]>(sql, [id]);
     if (result.length === 0) {
-      return res.status(404).json({ error: 'Flashcard not found' });
+      return res
+        .status(404)
+        .json({ error: 'Flashcard not found', success: false });
     }
     res.status(200).json(result);
   } catch (err) {
     console.error('Error fetching flashcard:', err);
-    return res.status(500).json({ error: 'Failed to fetch flashcard' });
+    return res
+      .status(500)
+      .json({ error: 'Failed to fetch flashcard', success: false });
   }
 };
 
 export async function getFlashcardByCollection(
   req: Request<
     { collectionId: number },
-    { message: string; success: boolean; error: string },
+    { success?: boolean; error?: string },
     void,
     void
   >,
@@ -58,21 +62,24 @@ export async function getFlashcardByCollection(
       [collectionId],
     );
     if (results.length === 0) {
-      return res
-        .status(404)
-        .json({ error: 'No flashcard with this collection found' });
+      return res.status(404).json({
+        error: 'No flashcard with this collection found',
+        success: false,
+      });
     }
     res.status(200).json(results);
   } catch (err) {
     console.error('Error fetching flashcards:', err);
-    return res.status(500).json({ error: 'Failed to fetch collection' });
+    return res
+      .status(500)
+      .json({ error: 'Failed to fetch collection', success: false });
   }
 }
 
 export const createFlashcard = async (
   req: Request<
     void,
-    { message: string; success: boolean; error: string },
+    { message?: string; success: boolean; error?: string },
     {
       flashcardQuestion: string;
       flashcardAnswer: string;
@@ -84,7 +91,9 @@ export const createFlashcard = async (
 ) => {
   const { flashcardQuestion, flashcardAnswer, collectionId } = req.body;
   if (!flashcardQuestion || !flashcardAnswer || !collectionId) {
-    return res.status(400).json({ error: 'All fields are required' });
+    return res
+      .status(400)
+      .json({ error: 'All fields are required', success: false });
   }
   const sql =
     'INSERT INTO flashcard(flashcardQuestion, flashcardAnswer, collectionId) VALUES (?,?,?)';
@@ -96,15 +105,19 @@ export const createFlashcard = async (
     ]);
   } catch (err) {
     console.error('Error creating flashcard:', err);
-    return res.status(500).json({ error: 'Failed to create flashcard' });
+    return res
+      .status(500)
+      .json({ error: 'Failed to create flashcard', success: false });
   }
-  res.status(201).json({ message: 'Flashcard created successfully' });
+  res
+    .status(201)
+    .json({ message: 'Flashcard created successfully', success: true });
 };
 
 export const updateFlashcard = async (
   req: Request<
     { id: number },
-    { message: string; success: boolean; error: string },
+    { message?: string; success: boolean; error?: string },
     {
       flashcardQuestion: string;
       flashcardAnswer: string;
@@ -117,7 +130,9 @@ export const updateFlashcard = async (
   const { id } = req.params;
   const { flashcardQuestion, flashcardAnswer, collectionId } = req.body;
   if (!flashcardQuestion || !flashcardAnswer) {
-    return res.status(400).json({ error: 'All fields are required' });
+    return res
+      .status(400)
+      .json({ error: 'All fields are required', success: false });
   }
   const sql =
     'UPDATE flashcard SET flashcardQuestion = ?, flashcardAnswer = ?, collectionId = ? WHERE flashcardId = ?';
@@ -128,18 +143,24 @@ export const updateFlashcard = async (
       collectionId,
       id,
     ]);
-    if (result.affectedRows === 0) res.status(404).send('Flashcard not found');
-    else res.status(200).send('Flashcard updated successfully');
+    if (result.affectedRows === 0)
+      res.status(404).json({ error: 'Flashcard not found', success: false });
+    else
+      res
+        .status(200)
+        .json({ message: 'Flashcard updated successfully', success: true });
   } catch (err) {
     console.error('Error updating flashcard:', err);
-    return res.status(500).json({ error: 'Failed to update flashcard' });
+    return res
+      .status(500)
+      .json({ error: 'Failed to update flashcard', success: false });
   }
 };
 
 export const deleteFlashcard = async (
   req: Request<
     { id: number },
-    { message: string; success: boolean; error: string },
+    { message?: string; success: boolean; error?: string },
     { flashcardQuestion: string; flashcardAnswer: string },
     void
   >,
@@ -149,10 +170,16 @@ export const deleteFlashcard = async (
   const sql = 'DELETE FROM flashcard WHERE flashcardId = ?';
   try {
     const [result] = await mysqlDatabase.execute<ResultSetHeader>(sql, [id]);
-    if (result.affectedRows === 0) res.status(404).send('Flashcard not found');
-    else res.status(200).send('Flashcard deleted successfully');
+    if (result.affectedRows === 0)
+      res.status(404).json({ error: 'Flashcard not found', success: false });
+    else
+      res
+        .status(200)
+        .json({ message: 'Flashcard deleted successfully', success: true });
   } catch (err) {
     console.error('Error deleting flashcard:', err);
-    return res.status(500).json({ error: 'Failed to delete flashcard' });
+    return res
+      .status(500)
+      .json({ error: 'Failed to delete flashcard', success: false });
   }
 };

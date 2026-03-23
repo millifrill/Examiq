@@ -28,7 +28,7 @@ export const getUsers = async (_req: Request, res: Response) => {
 export const getUserById = async (
   req: Request<
     { id: ObjectId },
-    { success: boolean; error: string },
+    { success?: boolean; error?: string },
     void,
     void
   >,
@@ -68,9 +68,6 @@ export const createUser = async (
       userEmail: userEmail,
       userPassword: hashedPassword,
     });
-    console.log('Password from user', userPassword);
-    console.log('Hashed password', hashedPassword);
-    // if(username)
   } catch (err) {
     console.error('Error creating user:', err);
     return res
@@ -96,9 +93,6 @@ export const loginUser = async (
       .findOne({
         username: username,
       });
-    console.log('user', user);
-    console.log('username', username);
-    console.log('Password from user', userPassword);
     if (!user) {
       res.status(401).json({ error: 'Wrong username', success: false });
       return;
@@ -136,7 +130,6 @@ export const updateUser = async (
 ) => {
   const { username, userEmail, userPassword } = req.body;
   const updatedUser: UpdatedUser = {};
-  console.log('updatedUser', updatedUser);
 
   if (username) {
     updatedUser.username = username;
