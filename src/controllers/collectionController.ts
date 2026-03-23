@@ -15,7 +15,29 @@ interface Collection extends RowDataPacket {
   categoryId: number;
 }
 
-export async function createCollection(req: Request, res: Response) {
+type Idparams = { id: string };
+
+type TypeParams = {
+  type: string;
+};
+
+type IdTypeParams = {
+  id: string;
+  type: string;
+};
+
+type CollectionBody = {
+  collectionName: string;
+  collectionType: string;
+  sharedCollection: boolean;
+  createdBy: string;
+  categoryId: number;
+};
+
+export async function createCollection(
+  req: Request<CollectionBody>,
+  res: Response,
+) {
   const {
     collectionName,
     collectionType,
@@ -66,7 +88,7 @@ export async function getCollections(_req: Request, res: Response) {
 
 export async function deleteCollection(req: Request, res: Response) {
   const { id } = req.params;
-  let rows;
+  let rows: number;
   try {
     const [results] = await db.query<ResultSetHeader>(
       'DELETE FROM collections WHERE collectionId = ?',
@@ -89,7 +111,7 @@ export async function deleteCollection(req: Request, res: Response) {
 
 export async function getCollectionById(req: Request, res: Response) {
   const { id } = req.params;
-  let returnData;
+  let returnData: Collection[];
   try {
     const [results] = await db.query<Collection[]>(
       'SELECT * FROM collections WHERE collectionId = ?',
