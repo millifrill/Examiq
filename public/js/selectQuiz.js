@@ -35,7 +35,7 @@ async function collectionsOptionInit() {
       collectionButton.href = '/solveQuiz.html';
       collectionButton.classList.add('button');
       const a = document.createElement('a');
-      a.href = `/public/solveQuiz.html?id=${collection.collectionId}`;
+      a.href = `./solveQuiz.html?id=${collection.collectionId}`;
       const svgIcon = document.createElement('div');
       svgIcon.classList.add('svgIcon');
       svgIcon.innerHTML = svg;

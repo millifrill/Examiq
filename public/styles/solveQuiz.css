@@ -19,3 +19,7 @@
 .option {
   margin: 5px 10px 0 7px;
 }
+
+.card {
+  min-width: 300px;
+}
