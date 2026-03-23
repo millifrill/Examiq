@@ -315,7 +315,7 @@ a.button {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
   border: 1px solid var(--primary);
   border-radius: var(--radius);
-  background-color: #fff;
+  background-color: #eef2f7;
   font-family: 'Poppins', 'Montserrat', sans-serif;
   font-size: 1rem;
   font-weight: 600;
@@ -325,10 +325,10 @@ a.button {
 }
 
 .white-button:hover {
-  background-color: #0d273e;
+  background-color: #dbe7f3;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease;
-  transform:;
+  transform: scale(1.02);
 }
 
 .input-div img {
