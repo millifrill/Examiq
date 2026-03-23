@@ -1,0 +1,43 @@
+:root {
+  --primary: #0f2c47;
+  --secondary: #347ec2;
+  --background: #f8f8f8;
+  --textLight: #f8f8f8;
+  --textDark: #0d2944;
+  --warn: rgb(182, 25, 25);
+  --info: rgb(0, 54, 0);
+  --radius: 8px;
+}
+
+#active-question {
+  text-align: center;
+  margin: 0;
+  font-weight: 600;
+}
+
+.card {
+  min-height: 200px;
+  height: auto;
+  padding: 20px;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.column-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons > * {
+  width: 48%;
+  color: var(--textDark);
+}
+
+.result {
+  width: 100%;
+  color: var(--textLight);
+}

@@ -5,6 +5,7 @@ const router = express.Router();
 import {
   getFlashcards,
   getFlashcardById,
+  getFlashcardByCollection,
   createFlashcard,
   updateFlashcard,
   deleteFlashcard,
@@ -12,6 +13,7 @@ import {
 
 router.get('/flashcards', getFlashcards);
 router.get('/flashcard/:id', getFlashcardById);
+router.get('/flashcards/:collectionId', getFlashcardByCollection);
 router.post('/flashcard', createFlashcard);
 router.put('/flashcard/:id', updateFlashcard);
 router.delete('/flashcard/:id', deleteFlashcard);

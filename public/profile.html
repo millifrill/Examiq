@@ -29,7 +29,7 @@
         </div>
         <div class="edit-information">
           <h3 class="profil-h3-bold">Uppdatera din profil</h3>
-          <form id="updateForm" action="" autocomplete="off">
+          <form id="updateForm" action="" autocomplete="off" novalidate>
             <label class="label" for="username">Användarnamn</label>
             <input
               class="input"
@@ -47,25 +47,6 @@
               name="email"
               placeholder="Ange ny email"
             />
-            <label class="label" for="current-password"
-              >Nuvarande lösenord</label
-            >
-            <div class="input-div">
-              <input
-                class="toggle-password0"
-                placeholder="Ange nuvarande lösenord"
-                type="password"
-                id="current-password"
-                name="password"
-                minlength="10"
-                maxlength="20"
-              />
-              <img
-                src="./img/eye-closed.svg"
-                class="eye-icon0"
-                alt="Öga blundar"
-              />
-            </div>
             <label class="label" for="password1">Nytt lösenord</label>
             <div class="input-div">
               <input

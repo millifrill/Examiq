@@ -37,8 +37,6 @@ async function getUser() {
     const res = await fetch(`http://localhost:3000/api/user/${userId}`);
     const data = await res.json();
     console.log('data', data);
-    //  console.log('username ', data[0].username);
-    //  console.log('userEmail ', data[0].userEmail);
 
     const getCardUsername = data.username;
     console.log('getCardUsername', getCardUsername);
@@ -65,14 +63,16 @@ async function updateUser(event) {
   const userPassword = userPassword1;
   const userId = JSON.parse(localStorage.getItem('userId'));
 
-  validateUserInput(
+  const isValid = validateUserInput({
     username,
     userEmail,
     currentPassword,
     userPassword,
     userPassword2,
     errorMessage,
-  );
+  });
+
+  if (!isValid) return true;
 
   const user = {};
   console.log('user', user);

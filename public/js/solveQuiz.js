@@ -31,7 +31,7 @@ next.addEventListener('click', () => {
     listQuestions();
     next.disabled = true;
   } else {
-    finishA.href = `/AgiltBackendProjekt/public/quizResult.html?id=${quizId}`;
+    finishA.href = `/public/quizResult.html?id=${quizId}`;
   }
 });
 

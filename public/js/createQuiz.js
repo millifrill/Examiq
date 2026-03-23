@@ -345,6 +345,7 @@ function clearQuizFields() {
   inputValues.quizAnswer3 = '';
   setAddEditButton('add');
 }
+
 function syncShareCollectionCheckbox() {
   if (!collections || !inputValues.collectionId) {
     shareCollection.checked = false;

@@ -69,8 +69,8 @@ export function initHeader() {
   }
 
   function logoutUser() {
-    localStorage.setItem('username', JSON.stringify(''));
-    localStorage.setItem('userId', JSON.stringify(''));
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
   }
   logout.addEventListener('click', logoutUser);
 }

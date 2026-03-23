@@ -41,13 +41,15 @@ async function createUser(event) {
   const userPassword2 = inputPassword2.value.trim();
   const userPassword = userPassword1;
 
-  validateUserInput(
+  const isValid = validateUserInput({
     username,
     userEmail,
     userPassword,
     userPassword2,
     errorMessage,
-  );
+  });
+
+  if (!isValid) return false;
 
   try {
     const res = await fetch('http://localhost:3000/api/register', {
@@ -59,7 +61,13 @@ async function createUser(event) {
     });
     const data = await res.json();
     console.log('data', data);
-    window.location.href = 'login.html';
+    if (res.ok && res.status === 201) {
+      window.location.href = 'login.html';
+    }
+    if (!res.ok) {
+      errorMessage.textContent = 'Användarnamnet är redan upptaget';
+      return;
+    }
   } catch (err) {
     console.error('Error creating user account', err);
   }
@@ -89,8 +97,9 @@ async function loginUser(event) {
     }
     localStorage.setItem('username', JSON.stringify(username));
     localStorage.setItem('userId', JSON.stringify(data.userId));
-    // localStorage.setItem('userId', JSON.stringify(data.userEmail));
-    window.location.href = 'index.html';
+    if (res.ok && res.status === 200) {
+      window.location.href = 'index.html';
+    }
   } catch (err) {
     console.error('Error logging in user', err);
   }

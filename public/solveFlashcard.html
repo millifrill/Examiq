@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/solveFlashcard.js"></script>
+    <link rel="stylesheet" href="./styles/global.css" />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/footer.css" />
+    <link rel="stylesheet" href="./styles/solveFlashcard.css" />
+    <title>Lös Flashcard</title>
+  </head>
+  <body>
+    <header id="headerContainer"></header>
+    <main>
+      <h2>Vet du eller gissar du?</h2>
+      <div class="container">
+        <h3 id="active-question"></h3>
+        <div class="card"></div>
+        <div class="buttons">
+          <button class="know wrong button">Jag vet</button>
+          <button class="guess right button">Jag gissar</button>
+        </div>
+      </div>
+    </main>
+    <footer id="footerContainer"></footer>
+  </body>
+</html>
