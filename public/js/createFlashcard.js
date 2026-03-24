@@ -7,7 +7,7 @@ const accordion = document.querySelectorAll('.accordion');
 const flashcardsDiv = document.querySelector('.flashcards-div');
 const createCollectionBtn = document.querySelector('.create-collection-btn');
 const saveFlashcardBtn = document.querySelector('.save-flashcard-btn');
-// const deleteFlashcardBtn = document.querySelector('.delete-flashcard-btn');
+const deleteFlashcardBtn = document.querySelector('.delete-flashcard-btn');
 const addIconSubmitDiv = document.querySelector('.add-icon-div');
 const addFlashcard = document.querySelector('.add-flashcard');
 const errorMessage = document.querySelector('.error-message');
@@ -37,6 +37,10 @@ function openFlaschcardAccordion(event) {
 
   if (target.closest('.save-flashcard-btn')) {
     saveFlashcard(event);
+  }
+
+  if (target.closest('.delete-flashcard-btn')) {
+    deleteFlashcard(event);
   }
 }
 flashcardsDiv.addEventListener('click', openFlaschcardAccordion);
@@ -106,7 +110,9 @@ async function getFlashcardCollections() {
     let optionFragment = document.createDocumentFragment();
     for (let items of collections) {
       let option = document.createElement('option');
-      option.textContent = items.collectionName;
+      option.textContent =
+        items.collectionName.charAt(0).toUpperCase() +
+        items.collectionName.slice(1);
       option.value = items.collectionId;
       optionFragment.append(option);
     }
@@ -114,12 +120,12 @@ async function getFlashcardCollections() {
   } catch (err) {
     console.error('Failed to fetch collections', err);
   }
+  infoMessage.textContent = '';
 }
 getCollections.addEventListener('click', getFlashcardCollections);
 
 async function getCollectionFlashcards(event) {
   selectedCollection = event.target.value;
-  console.log('selected value', selectedCollection);
 
   async function getFlashcards() {
     try {
@@ -140,7 +146,7 @@ async function getCollectionFlashcards(event) {
 
       let flashcard = '';
       for (let items of flashcardData) {
-        flashcard += `<div class="card">
+        flashcard += `<div class="card" data-flashcard-id="${items.flashcardId}">
               <div class="accordion flex-row">
                 <div class="flex-row space-between">
                   <h3 class="h3">${items.flashcardQuestion}</h3>
@@ -211,6 +217,8 @@ function addFlashcardAccordion(event) {
                 </div>
               </div>`;
   flashcardsDiv.insertAdjacentHTML('beforeend', flashcard);
+  infoMessage.textContent = '';
+  errorMessage.textContent = '';
 }
 addFlashcard.addEventListener('click', addFlashcardAccordion);
 
@@ -242,10 +250,32 @@ async function saveFlashcard(event) {
     });
     const data = await res.json();
     console.log('data', data);
-    // infoMessage.textContent = 'Kort skapat';
+    errorMessage.textContent = '';
+    infoMessage.textContent = 'Kort skapat';
   } catch (err) {
     console.error('Error creating collection', err);
   }
-  getCollectionFlashcards();
 }
 saveFlashcardBtn.addEventListener('click', saveFlashcard);
+
+async function deleteFlashcard(event) {
+  const target = event.target;
+  const card = target.closest('.card');
+  const flashcardId = card.dataset.flashcardId;
+  console.log('flashcardId', flashcardId);
+  try {
+    const res = await fetch(
+      `http://localhost:3000/api/flashcard/${flashcardId}`,
+      {
+        method: 'DELETE',
+      },
+    );
+    const data = await res.json();
+    console.log('data', data);
+    infoMessage.textContent = 'Kortet har raderats';
+    card.remove();
+  } catch (err) {
+    console.error('Error deleting flashcard', err);
+  }
+}
+deleteFlashcardBtn.addEventListener('click', deleteFlashcard);

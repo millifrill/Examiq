@@ -15,7 +15,7 @@ async function collectionsOptionInit(): Promise<void> {
       collectionButton.innerHTML =
         collection.collectionName.charAt(0).toUpperCase() +
         collection.collectionName.slice(1);
-      collectionButton.classList.add('white-button');
+      collectionButton.classList.add('light-button');
       collectionButton.style.width = '100%';
       collectionButton.href = `./solveFlashcard.html?id=${collection.collectionId}`;
       flashcardContainer?.appendChild(collectionButton);

@@ -48,8 +48,22 @@ async function createUser(event) {
     userPassword2,
     errorMessage,
   });
-
   if (!isValid) return false;
+
+  if (username === '') {
+    errorMessage.textContent = 'Användarnamn krävs';
+    return false;
+  }
+
+  if (userEmail === '') {
+    errorMessage.textContent = 'Email krävs';
+    return false;
+  }
+
+  if (userPassword.length === 0 || userPassword2.length === 0) {
+    errorMessage.textContent = 'Lösenord krävs';
+    return false;
+  }
 
   try {
     const res = await fetch('http://localhost:3000/api/register', {
