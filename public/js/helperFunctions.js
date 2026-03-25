@@ -287,14 +287,16 @@ export function validateUserInput({
   userPassword2,
   errorMessage,
 }) {
-  if (username.length < 2) {
-    errorMessage.textContent = 'Användarnamnet måste vara minst 2 karaktärer';
-    return false;
-  }
-  if (username.length > 20) {
-    errorMessage.textContent =
-      'Användarnamnet får inte vara mer än 20 karaktärer';
-    return false;
+  if (username) {
+    if (username.length < 2) {
+      errorMessage.textContent = 'Användarnamnet måste vara minst 2 karaktärer';
+      return false;
+    }
+    if (username.length > 20) {
+      errorMessage.textContent =
+        'Användarnamnet får inte vara mer än 20 karaktärer';
+      return false;
+    }
   }
 
   if (userEmail.length > 1) {
