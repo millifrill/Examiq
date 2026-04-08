@@ -1,4 +1,4 @@
-# Flashcard & Quiz API
+# Flashcard & Quiz Study Platform
 
 A study platform where users can create their own questions and answers in both quiz and flashcard formats, 
 explore and use collections created by other users, and practice through interactive sessions.
