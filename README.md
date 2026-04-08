@@ -28,3 +28,6 @@ git clone https://github.com/millifrill/AgiltBackendProjekt.git
 cd AgiltBackendProjekt
 npm install
 ```
+
+## About
+This project was developed as part of an agile backend development course.
