@@ -16,20 +16,25 @@
       <h2>Delade samlingar</h2>
       <div class='container'>
         <div>
-            <label for='search-collections'>Välj en categori du vill söka på</lable>
-               <div class='flex-row', class="category">
-           <button class="classer historyClass" data-target='History'>History</button>
-           <button class="classer MathematicsClass" data-target='Mathematics'>Mathematics</button>
-           <button class="classer GeographyClass" data-target='Geography'>Geography</button>
-           <button class="classer PsychologyClass" data-target='Psychology'>Psychology</button>
-           <button class="classer BiologyClass" data-target='Biology'>Biology</button>
-           <button class="classer ChemistryClass" data-target='Chemistry'>Chemistry</button>
-           <button class="classer uxdClass" data-target='UXD'>UXD</button>
-           <button class="classer PhysicaClass" data-target='Physics'>Physics</button>
+            <label class="label" for="categories"
+              >Välj kategori du vill söka på</label
+            >
+            <div class="input-div flex-row">
+              <select class="select" name="category" id="category">
+                <option value="1">Historia</option>
+                <option value="2">Matematik</option>
+                <option value="3">Geografi</option>
+                <option value="4">Psykologi</option>
+                <option value="5">Biologi</option>
+                <option value="6">Kemi</option>
+                <option value="7">UXD</option>
+                <option value="8">Fysik</option>
+              </select>
+              <span class="unicode">&#x2335;</span>
             </div>
-        </div>
+          </div>
         <div class='flex-column'>
-          <h5>Extra tillval</h5>
+          <h3>Extra tillval</h3>
         <div class='flex-row'>
            <input class="checkbox" checked name='checkbox-quiz' type='checkbox' value='flashcard'>Flashcard
          </div>
@@ -39,7 +44,7 @@
       </div>
       <div id='render-collections'>
          <button>
-            
+
          </button>
       </div>
     </main>
